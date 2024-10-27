@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import logo from './logo.png'
+import React, { useState } from "react";
+import logo from "./logo.png";
 const Middle = ({ dishName, description, updateDish, updateHoverState }) => {
   const [hoveredPostIndex, setHoveredPostIndex] = useState(null);
 
@@ -35,13 +35,15 @@ const Middle = ({ dishName, description, updateDish, updateHoverState }) => {
 
             return (
               <div
-                className={`post post-${colIndex + 1} ${isHovered ? 'hover' : ''}`} // Apply hover class to the post
+                className={`post post-${colIndex + 1} ${
+                  isHovered ? "hover" : ""
+                }`} // Apply hover class to the post
                 key={postIndex}
               >
                 <div
-                  className={`plate ${isHovered ? 'hovered' : ''}`} // Apply hovered class on the plate
-                  onMouseOver={() => handlePlateHover(currentIndex)}  // Handle hover on plate
-                  onMouseLeave={handlePlateLeave}  // Handle leave on plate
+                  className={`plate ${isHovered ? "hovered" : ""}`} // Apply hovered class on the plate
+                  onMouseOver={() => handlePlateHover(currentIndex)} // Handle hover on plate
+                  onMouseLeave={handlePlateLeave} // Handle leave on plate
                 >
                   <img src="/" alt="Dish" />
                 </div>
