@@ -1,0 +1,3 @@
+ancestorEntries = ["src/App.jsx"]
+ourEntries = ["src/App.jsx"]
+theirEntries = ["src/App.jsx"]
