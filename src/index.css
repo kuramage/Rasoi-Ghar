@@ -404,3 +404,7 @@ body {
 .upload{
   border : 2px solid
 }
+
+.hidden {
+  display: none;
+}

@@ -1,23 +1,67 @@
 import { Component } from "react";
 // import PropTypes from "prop-types";
+import { supabase } from '../../API/supabaseClient.js';
 import logo from "./signin.png";
 import logo2 from "./signup.png";
 
 export class SignIn extends Component {
   state = {
     isSignIn: true,
-    issignup: true, // Initial state for tracking sign-in or register view
+    isSignUp: true, // Initial state for tracking sign-in or register view
+    message: "",
   };
 
   toggleForm = () => {
     this.setState((prevState) => ({
       isSignIn: !prevState.isSignIn,
-      issignup: !prevState.issignup,
+      isSignUp: !prevState.isSignUp,
+      message: "",
     }));
   };
+
+
+  handleSignIn = async (event) => {
+    event.preventDefault();
+    const { email, password } = this.state;
+
+    const { error } = await supabase.auth.signIn({
+      email,
+      password,
+      options: {
+        emailRedirectTo: 'http://localhost:5173'
+      }
+    });
+
+    if (error) {
+      this.setState({ message: error.message });
+    } else {
+      this.setState({ message: 'Sign in successful!' });
+      // Redirect or perform other actions after successful sign-in
+    }
+  };
+
+  handleSignUp = async (event) => {
+    event.preventDefault();
+    const { email, password } = this.state;
+
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: 'http://localhost:5173'
+      }
+    });
+
+    if (error) {
+      this.setState({ message: error.message });
+    } else {
+      this.setState({ message: 'Sign up successful! Please check your email for verification.' });
+      // Redirect or perform other actions after successful sign-up
+    }
+  };
+
   render() {
-    const { isSignIn } = this.state;
-    const { issignup } = this.state;
+    const { isSignIn, isSignUp, message} = this.state;
     return (
       <div
         className="sign"
@@ -53,7 +97,12 @@ export class SignIn extends Component {
                 >
                   Sign In
                 </h1>
-                <form className="space-y-4 md:space-y-6" action="#">
+
+                {message && (
+                <p className="text-red-500">{message}</p> // Display error/success messages
+                )}
+
+                <form className="space-y-4 md:space-y-6" action="#" onSubmit={this.handleSignIn} >
                   <div>
                     <label
                       htmlFor="email"
@@ -131,7 +180,7 @@ export class SignIn extends Component {
                     Don’t have an account yet?{" "}
                     <a
                       href="#"
-                      className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                      className="font-medium text-white hover:underline dark:text-primary-500"
                       onClick={this.toggleForm}
                     >
                       Sign up
@@ -170,7 +219,12 @@ export class SignIn extends Component {
                   >
                     Sign Up
                   </h1>
-                  <form className="space-y-4 md:space-y-6" action="#">
+
+                  {message && (
+                  <p className="text-red-500">{message}</p> // Display error/success messages
+                  )}
+
+                  <form className="space-y-4 md:space-y-6" action="#" onSubmit={this.handleSignUp}>
                     <div>
                       <label
                         htmlFor="email"
@@ -249,10 +303,10 @@ export class SignIn extends Component {
                       Don’t have an account yet?{" "}
                       <a
                         href="#"
-                        className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                        className="font-medium text-white hover:underline dark:text-primary-500"
                         onClick={this.toggleForm}
                       >
-                        Sign up
+                        Sign in
                       </a>
                     </p>
                   </form>
@@ -267,7 +321,7 @@ export class SignIn extends Component {
           alt="photo"
         />
         <img
-          className={`image-container2 ${issignup ? "" : "slide2"}`}
+          className={`image-container2 ${isSignUp ? "" : "slide2"}`}
           src={logo2}
           alt="photo"
         />
