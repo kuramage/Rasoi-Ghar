@@ -7,8 +7,10 @@ import logo2 from "./signup.png";
 export class SignIn extends Component {
   state = {
     isSignIn: true,
-    isSignUp: true, // Initial state for tracking sign-in or register view
+    isSignUp: true,
     message: "",
+    email: "",
+    password: "",
   };
 
   toggleForm = () => {
@@ -19,24 +21,19 @@ export class SignIn extends Component {
     }));
   };
 
-
   handleSignIn = async (event) => {
     event.preventDefault();
     const { email, password } = this.state;
 
-    const { error } = await supabase.auth.signIn({
+    const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
-      options: {
-        emailRedirectTo: 'http://localhost:5173'
-      }
     });
 
     if (error) {
       this.setState({ message: error.message });
     } else {
       this.setState({ message: 'Sign in successful!' });
-      // Redirect or perform other actions after successful sign-in
     }
   };
 
@@ -47,18 +44,19 @@ export class SignIn extends Component {
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options: {
-        emailRedirectTo: 'http://localhost:5173'
-      }
     });
 
     if (error) {
       this.setState({ message: error.message });
     } else {
-      this.setState({ message: 'Sign up successful! Please check your email for verification.' });
-      // Redirect or perform other actions after successful sign-up
+      this.setState({ message: 'Sign up successful!' });
     }
   };
+
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
 
   render() {
     const { isSignIn, isSignUp, message} = this.state;
@@ -122,6 +120,7 @@ export class SignIn extends Component {
                       }}
                       placeholder="name@company.com"
                       required=""
+                      onChange={this.handleChange}
                     />
                   </div>
                   <div>
@@ -143,6 +142,7 @@ export class SignIn extends Component {
                         height: "10vh",
                       }}
                       required=""
+                      onChange={this.handleChange}
                     />
                   </div>
                   {
@@ -244,6 +244,7 @@ export class SignIn extends Component {
                         }}
                         placeholder="name@company.com"
                         required=""
+                        onChange={this.handleChange}
                       />
                     </div>
 
@@ -266,6 +267,7 @@ export class SignIn extends Component {
                           height: "10vh",
                         }}
                         required=""
+                        onChange={this.handleChange}
                       />
                     </div>
                     {
