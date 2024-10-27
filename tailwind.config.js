@@ -7,10 +7,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        'beige-200': '#D7B9A7',
-        'beige-300': '#C7A393',
+        "beige-200": "#D7B9A7",
+        "beige-300": "#C7A393",
       },
     },
   },
   plugins: [],
-}
+};

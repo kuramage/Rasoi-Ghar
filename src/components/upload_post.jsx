@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Sidebar from './sidebar';
-import MainContent from './upload';
-import StepsPanel from './panel';
+import React, { Component } from "react";
+import Sidebar from "./sidebar";
+import MainContent from "./upload";
+import StepsPanel from "./panel";
 
 export class UploadPost extends Component {
   constructor(props) {
@@ -37,13 +37,22 @@ export class UploadPost extends Component {
     return (
       <div className="flex h-screen">
         <Sidebar />
-        <div style={{ width: "82.67vw", position: "relative", left: "250px", display: "flex", justifyContent: "center" }}>
+        <div
+          style={{
+            width: "82.67vw",
+            position: "relative",
+            left: "250px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
           <MainContent
             title={title}
             onTitleChange={this.handleTitleChange}
             onAddStep={this.addStep}
-            {...currentStepData} // Pass current step data
-          />
+            {...currentStepData}
+          />{" "}
+          // Pass current step data
           <StepsPanel
             title={title}
             stepNumber={stepNumber}
