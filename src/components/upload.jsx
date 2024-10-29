@@ -153,7 +153,7 @@ class Upload extends Component {
         />
 
         {/* Video Upload Section */}
-        <div className="video border-2 border-gray-300 rounded-lg h-64 flex items-center justify-center mb-6" style={{ height: "43vh", width: "55vw", flexDirection: "column" }}>
+        <div className="video border-2 border-gray-300 rounded-lg h-64 flex items-center justify-center mb-6" style={{ height: "43vh", width: "55vw", flexDirection: "column", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}>
           {videoUrl ? (
             <video controls style={{ height: "100%", width: "100%" }}>
               <source src={videoUrl} type="video/mp4" />
