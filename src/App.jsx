@@ -36,7 +36,7 @@ class App extends Component {
   render() {
     return (
 
-      <Home/>
+      // <Home/>
 
       //       <div className="main" >
       //  <Login/>
@@ -67,9 +67,9 @@ class App extends Component {
       //   </div>
       // </div>
       
-      //   <div className="flex h-screen">
-      //   <UploadPost />
-      // </div>
+        <div className="flex h-screen">
+        <UploadPost />
+      </div>
 
       
     );
