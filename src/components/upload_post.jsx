@@ -1,68 +1,64 @@
-import React, { Component } from "react";
+// import React, { useState } from "react";
+import React, { useRef, useState } from "react"; // Ensure useRef is included
+
 import Sidebar from "./sidebar";
 import MainContent from "./upload";
-import StepsPanel from "./panel";
+import Panel from "./Panel";
 
-export class UploadPost extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: "untitled",
-      stepNumber: 1,
-      steps: [], // To store steps data
-      currentStepIndex: null, // To manage which step is active
-    };
-  }
+const UploadPost = () => {
+  const [title, setTitle] = useState("untitled");
+  const [steps, setSteps] = useState([]);
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const uploadRef = useRef();
+  // const [steps, setSteps] = useState([]);
 
-  handleTitleChange = (newTitle) => {
-    this.setState({ title: newTitle });
+  const handleStepSelect = (index) => {
+    uploadRef.current.handleSelectIndex(index); // Select the entry in Upload
+  };
+  const handleTitleChange = (newTitle) => {
+    setTitle(newTitle);
   };
 
-  addStep = (stepData) => {
-    this.setState((prevState) => ({
-      steps: [...prevState.steps, stepData],
-      stepNumber: prevState.steps.length + 1, // Update step number
-      currentStepIndex: prevState.steps.length, // Set new step as active
-    }));
+  // const handleStepSelect = (index) => {
+  //   setCurrentStepIndex(index);
+  // };
+
+  const addStep = (stepData) => {
+    setSteps((prevSteps) => [...prevSteps, stepData]);
+    setCurrentStepIndex(steps.length); // Update current step index
   };
 
-  selectStep = (index) => {
-    this.setState({ currentStepIndex: index });
-  };
+  const currentStepData = steps[currentStepIndex] || {};
 
-  render() {
-    const { title, stepNumber, steps, currentStepIndex } = this.state;
-    const currentStepData = steps[currentStepIndex] || {}; // Default to empty if no step selected
-
-    return (
-      <div className="flex h-screen">
-        <Sidebar />
-        <div
-          style={{
-            width: "82.67vw",
-            position: "relative",
-            left: "250px",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <MainContent
-            title={title}
-            onTitleChange={this.handleTitleChange}
-            onAddStep={this.addStep}
-            {...currentStepData}
-          />
-          <StepsPanel
-            title={title}
-            stepNumber={stepNumber}
-            steps={steps}
-            onAddStep={this.addStep} // Pass addStep function to StepsPanel
-            onSelectStep={this.selectStep}
-          />
-        </div>
+  return (
+    <div className="flex h-screen">
+      <Sidebar />
+      <div
+        style={{
+          width: "82.67vw",
+          position: "relative",
+          left: "250px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <MainContent
+          title={title}
+          onTitleChange={handleTitleChange}
+          onAddStep={addStep}
+          currentStepData={currentStepData}
+          ref={uploadRef}
+        />
+        <Panel
+          title={title}
+          steps={steps}
+          currentStepIndex={currentStepIndex} // Pass current index
+          onStepSelect={handleStepSelect}
+          uploadRef={uploadRef} // Pass function to update index
+        />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default UploadPost;

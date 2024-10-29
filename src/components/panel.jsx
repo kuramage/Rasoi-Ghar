@@ -1,19 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from 'prop-types';
 
-function Panel(props) {
-  const steps = props.steps || [];
+function panel({ title, onStepSelect, uploadRef }) {
+  const [steps, setSteps] = useState([1]);
 
+  const handleAddStep = () => {
+    const newStep = {
+      title: `Step ${steps.length + 1}`,
+    };
+
+    // Save the current data in the Upload component when a new step is added
+    if (uploadRef.current) {
+      uploadRef.current.handleAddStep(); // Ensure this method exists in the Upload component
+    }
+
+    setSteps((prevSteps) => [...prevSteps, newStep]);
+  };
+
+  const onStepClick = (step) => {
+    if (uploadRef.current) {
+      uploadRef.current.handleSelectIndex(step); // Ensure this method exists in the Upload component
+    }
+  };
+  
   return (
-    <div
-      className="w-1/5 p-5 flex flex-col items-start space-y-4"
-      style={{ background: "#E6CDA4" }}
-    >
+    <div className="w-1/5 p-5 flex flex-col items-start space-y-4" style={{ background: "#E6CDA4" }}>
       <h2 className="font-bold">Steps:</h2>
+      
       <div style={{ position: "relative", width: "100%" }}>
         {steps.map((step, index) => (
           <div
             key={index}
-            className="jetbrains-mono text-3xl font-bold mb-6"
+            className="steps jetbrains-mono text-3xl font-bold mb-6"
             style={{
               background: "black",
               color: "white",
@@ -26,9 +44,11 @@ function Panel(props) {
               fontWeight: "1",
               fontSize: "20px",
               marginBottom: "3px",
+              cursor: "pointer",
             }}
+            onClick={() => onStepClick(index)}
           >
-            {step.title || "Untitled"}
+            { "Untitled"}
             <div
               style={{
                 position: "absolute",
@@ -63,7 +83,7 @@ function Panel(props) {
           borderRadius: "16px",
           filter: "drop-shadow(0 3px 2px rgba(0, 0, 0, 0.3))",
         }}
-        onClick={() => props.onAddStep({ title: props.title })} // Ensure this function is called
+        onClick={handleAddStep}
       >
         Add Step +
       </button>
@@ -71,7 +91,22 @@ function Panel(props) {
   );
 }
 
-export default Panel;
+panel.propTypes = {
+  onStepSelect: PropTypes.func.isRequired,
+  uploadRef: PropTypes.shape({
+    current: PropTypes.shape({
+      handleSaveData: PropTypes.func,
+    }),
+  }),
+};
+
+panel.defaultProps = {
+  onStepSelect: () => {}, // Set to a no-op function if not provided
+  uploadRef: { current: null }, // Default for uploadRef
+};
+
+export default panel;
+
 
 
 // import React from 'react';
