@@ -18,6 +18,17 @@ class Upload extends Component {
       dataArray: [],
       currentIndex: null, // Changed to null for no selection
     };
+    this.ingredientData = {
+      a: ["apple", "apricot"],
+      b: ["banana", "broccoli"],
+      c: ["chicken breast", "chicken thigh"],
+      d: ["dill", "dates"],
+      e: ["eggplant", "elderberry"],
+      f: ["fig", "fennel"],
+      g: ["garlic", "ginger"],
+      h: ["honey", "hummus"],
+      // add more letters as needed
+    };
   }
 
   handleChange = (event) => {
@@ -78,16 +89,29 @@ class Upload extends Component {
 
   // Method to handle selecting an entry from Panel
   handleSelectIndex = (index) => {
-    const selectedData = this.state.dataArray[index];
-    this.setState({
-      currentIndex: index,
-      title: selectedData.title,
-      videoUrl: selectedData.videoUrl,
-      notes: selectedData.description,
-      selectedIngredients: selectedData.ingredients,
-      isEditingNotes: selectedData.description ? true : false,
-    });
+    if (index === this.state.dataArray.length ) {
+      // Reset all fields to initial state if the latest entry is selected
+      this.setState({
+        currentIndex: index,
+        title: "",
+        videoUrl: null,
+        notes: "",
+        selectedIngredients: [],
+        isEditingNotes: false,
+      });
+    } else {
+      const selectedData = this.state.dataArray[index];
+      this.setState({
+        currentIndex: index,
+        title: selectedData.title,
+        videoUrl: selectedData.videoUrl,
+        notes: selectedData.description,
+        selectedIngredients: selectedData.ingredients,
+        isEditingNotes: selectedData.description ? true : false,
+      });
+    }
   };
+  
 
   render() {
     const {
@@ -183,7 +207,7 @@ class Upload extends Component {
           {/* Ingredients Area */}
           <div className="jetbrains-mono" style={{ width: "35%" }}>
             <h2 className="font-bold text-2xl mb-2">Ingredients:</h2>
-            <ul className="list-disc pl-5 max-h-32 overflow-y-auto" style={{ marginBottom: "20px" }}>
+            <ul className="list-disc pl-5 max-h-32 overflow-y-auto " style={{ marginBottom: "20px" }}>
               {selectedIngredients.map((ingredient, index) => (
                 <li key={index} className="text-lg mb-2">
                   <div style={{ display: "inline-flex", alignItems: "center" }}>
@@ -200,7 +224,8 @@ class Upload extends Component {
               value={searchQuery}
               onChange={this.handleSearchChange}
               placeholder="Search ingredients"
-              className="border rounded-lg p-2 w-full mb-2"
+              className="border rounded-lg p-2 w-full mb-2  border-gray-300"
+              
             />
 
             {suggestions.length > 0 && (
@@ -215,7 +240,7 @@ class Upload extends Component {
           </div>
         </div>
 
-        {/* Display Previous Entries */}
+        {/* Display Previous Entries
         <div className="mt-4">
           <h2>Saved Entries:</h2>
           <ul>
@@ -232,7 +257,7 @@ class Upload extends Component {
         </div>
 
         {/* Display Selected Data */}
-        {currentData.title && (
+        {/* {currentData.title && (
           <div>
             <h2>Current Entry:</h2>
             <h3>{currentData.title}</h3>
@@ -247,8 +272,8 @@ class Upload extends Component {
               ))}
             </ul>
           </div>
-        )}
-      </div>
+        )} */}
+      </div>  
     );
   }
 }

@@ -32,7 +32,7 @@ const UploadPost = () => {
 
   return (
     <div className="flex h-screen">
-      <Sidebar />
+      <Sidebar isUploadActive={true} />
       <div
         style={{
           width: "82.67vw",

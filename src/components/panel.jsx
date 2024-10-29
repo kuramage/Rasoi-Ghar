@@ -1,32 +1,38 @@
-import React, { useState } from "react";
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
-function panel({ title, onStepSelect, uploadRef }) {
+function Panel({ onStepSelect, uploadRef, title }) {
   const [steps, setSteps] = useState([1]);
+  const [stepTitles, setStepTitles] = useState([]);
+
+  useEffect(() => {
+    if (steps.length === 0) {
+      setStepTitles([title || "Untitled"]);
+    }
+  }, [steps.length, title]);
 
   const handleAddStep = () => {
     const newStep = {
-      title: `Step ${steps.length + 1}`,
+      title: title || "Untitled",
     };
 
-    // Save the current data in the Upload component when a new step is added
-    if (uploadRef.current) {
-      uploadRef.current.handleAddStep(); // Ensure this method exists in the Upload component
-    }
-
     setSteps((prevSteps) => [...prevSteps, newStep]);
-  };
+    setStepTitles((prevTitles) => [...prevTitles, title || "Untitled"]);
 
-  const onStepClick = (step) => {
     if (uploadRef.current) {
-      uploadRef.current.handleSelectIndex(step); // Ensure this method exists in the Upload component
+      uploadRef.current.handleAddStep();
     }
   };
-  
+
+  const onStepClick = (index) => {
+    if (uploadRef.current) {
+      uploadRef.current.handleSelectIndex(index);
+    }
+  };
+
   return (
     <div className="w-1/5 p-5 flex flex-col items-start space-y-4" style={{ background: "#E6CDA4" }}>
       <h2 className="font-bold">Steps:</h2>
-      
       <div style={{ position: "relative", width: "100%" }}>
         {steps.map((step, index) => (
           <div
@@ -48,7 +54,19 @@ function panel({ title, onStepSelect, uploadRef }) {
             }}
             onClick={() => onStepClick(index)}
           >
-            { "Untitled"}
+            <span
+              style={{
+                display: "block",
+                background: "black",
+                color: "white",
+                width: "100%",
+                fontSize: "20px",
+                whiteSpace: "pre-wrap",
+                wordWrap: "break-word",
+              }}
+            >
+              {stepTitles[index] || "Untitled"}
+            </span>
             <div
               style={{
                 position: "absolute",
@@ -87,25 +105,52 @@ function panel({ title, onStepSelect, uploadRef }) {
       >
         Add Step +
       </button>
+      <button
+          className="jetbrains-mono bg-white border py-1 rounded-lg"
+          style={{
+            background: "linear-gradient(90deg, #FFFFFF 0%, #E6CDA4 100%)",
+            width: "185px",
+            height: "49px",
+            display: "flex",
+            justifyContent: "center",
+            fontSize: "25px",
+            border: "1px solid",
+            borderRadius: "16px",
+            filter: "drop-shadow(0 3px 2px rgba(0, 0, 0, 0.3))",
+            transition: "background 0.3s ease" // Smooth transition for background change
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "linear-gradient(90deg, #E6CDA4 0%, #FFFFFF 100%)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "linear-gradient(90deg, #FFFFFF 0%, #E6CDA4 100%)";
+          }}
+        >
+          Upload
+      </button>
     </div>
   );
 }
 
-panel.propTypes = {
+Panel.propTypes = {
   onStepSelect: PropTypes.func.isRequired,
   uploadRef: PropTypes.shape({
     current: PropTypes.shape({
-      handleSaveData: PropTypes.func,
+      handleAddStep: PropTypes.func,
+      handleSelectIndex: PropTypes.func,
     }),
   }),
+  title: PropTypes.string, // Expect a title prop
 };
 
-panel.defaultProps = {
-  onStepSelect: () => {}, // Set to a no-op function if not provided
-  uploadRef: { current: null }, // Default for uploadRef
+Panel.defaultProps = {
+  onStepSelect: () => {},
+  uploadRef: { current: null },
+  title: "", // Default for title
 };
 
-export default panel;
+export default Panel;
+
 
 
 
@@ -144,29 +189,29 @@ export default panel;
 //       <button onClick={props.onAddStep} className="jetbrains-mono bg-white border px-4 py-1 rounded-lg" style={{ width: "185px", height: "49px", display: "flex", fontSize: "25px", border: "1px solid", borderRadius: "16px", filter: "drop-shadow(0 3px 2px rgba(0, 0, 0, 0.3))" }}>
 //         Add Step +
 //       </button>
-//       <button
-//           className="jetbrains-mono bg-white border py-1 rounded-lg"
-//           style={{
-//             background: "linear-gradient(90deg, #FFFFFF 0%, #E6CDA4 100%)",
-//             width: "185px",
-//             height: "49px",
-//             display: "flex",
-//             justifyContent: "center",
-//             fontSize: "25px",
-//             border: "1px solid",
-//             borderRadius: "16px",
-//             filter: "drop-shadow(0 3px 2px rgba(0, 0, 0, 0.3))",
-//             transition: "background 0.3s ease" // Smooth transition for background change
-//           }}
-//           onMouseEnter={(e) => {
-//             e.currentTarget.style.background = "linear-gradient(90deg, #E6CDA4 0%, #FFFFFF 100%)";
-//           }}
-//           onMouseLeave={(e) => {
-//             e.currentTarget.style.background = "linear-gradient(90deg, #FFFFFF 0%, #E6CDA4 100%)";
-//           }}
-//         >
-//           Upload
-//       </button>
+      // <button
+      //     className="jetbrains-mono bg-white border py-1 rounded-lg"
+      //     style={{
+      //       background: "linear-gradient(90deg, #FFFFFF 0%, #E6CDA4 100%)",
+      //       width: "185px",
+      //       height: "49px",
+      //       display: "flex",
+      //       justifyContent: "center",
+      //       fontSize: "25px",
+      //       border: "1px solid",
+      //       borderRadius: "16px",
+      //       filter: "drop-shadow(0 3px 2px rgba(0, 0, 0, 0.3))",
+      //       transition: "background 0.3s ease" // Smooth transition for background change
+      //     }}
+      //     onMouseEnter={(e) => {
+      //       e.currentTarget.style.background = "linear-gradient(90deg, #E6CDA4 0%, #FFFFFF 100%)";
+      //     }}
+      //     onMouseLeave={(e) => {
+      //       e.currentTarget.style.background = "linear-gradient(90deg, #FFFFFF 0%, #E6CDA4 100%)";
+      //     }}
+      //   >
+      //     Upload
+      // </button>
 //     </div>
 //   );
 // }
