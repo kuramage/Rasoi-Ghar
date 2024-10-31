@@ -31,7 +31,8 @@ function Panel({ onStepSelect, uploadRef, title }) {
   };
 
   return (
-    <div className="w-1/5 p-5 flex flex-col items-start space-y-4" style={{ background: "#E6CDA4" }}>
+    <div className="w-1/5 p-5 flex flex-col items-start space-y-4" style={{ background: "#E6CDA4",
+      boxShadow: "5px 0 10px rgba(0, 0, 0, 0.3)",  }}>
       <h2 className="font-bold">Steps:</h2>
       <div style={{ position: "relative", width: "100%" }}>
         {steps.map((step, index) => (
