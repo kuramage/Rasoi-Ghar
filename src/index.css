@@ -24,9 +24,11 @@ body {
 
 .sidebar {
   position: fixed ;
-  /* border: 2px solid; */
+  border-right: 1px solid grey;
+  box-shadow: 1px 0 10px rgba(0, 0, 0, 0.3);
   width: 250px;
   height: 100vh;
+
   
   /* background-color: #f1f1f1; */
   padding: 20px;
@@ -42,12 +44,16 @@ body {
 .sidebar ul {
   list-style-type: none;
   width: 100%;
-  
+  /* border: 2px solid; */
+  position: relative;
+  top:30px;
+
 }
 
 .sidebar ul li {
   width: 100%;
   margin: 10px 0;
+  
   
 }
 
