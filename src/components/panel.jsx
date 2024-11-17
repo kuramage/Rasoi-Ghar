@@ -45,6 +45,7 @@ function Panel({ onStepSelect, uploadRef, title }) {
               width: "252px",
               minHeight: "50px",
               padding: "10px",
+              overflow: "hidden",
               overflowWrap: "break-word",
               position: "relative",
               marginLeft: "-20px",

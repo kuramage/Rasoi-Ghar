@@ -1,0 +1,4 @@
+;/*FB_PKG_DELIM*/
+
+__d("CometScreenReaderHeading.react",["BaseHeading.react","react"],(function(a,b,c,d,e,f,g){"use strict";var h,i=h||d("react"),j={visuallyHidden:{clip:"xzpqnlu",clipPath:"x1hyvwdk",height:"xjm9jq1",overflowX:"x6ikm8r",overflowY:"x10wlt62",position:"x10l6tqk",width:"x1i1rx1s",$$css:!0}};function a(a){return i.jsx(c("BaseHeading.react"),babelHelpers["extends"]({xstyle:j.visuallyHidden},a))}a.displayName=a.name+" [from "+f.id+"]";g["default"]=a}),98);
+__d("CometUFIAccessibleCommentsHeading.react",["fbt","CometScreenReaderHeading.react","react"],(function(a,b,c,d,e,f,g,h){"use strict";var i,j=i||d("react");function a(a){var b=a.commentCount;a=a.i18nCommentCount;return j.jsx(c("CometScreenReaderHeading.react"),{children:b!=null&&a!=null?h._({"*":"{number} comments","_1":"1 comment"},[h._plural(b,"number",a)]):h._("Comments")})}a.displayName=a.name+" [from "+f.id+"]";g["default"]=a}),226);
