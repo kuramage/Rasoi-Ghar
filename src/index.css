@@ -250,8 +250,8 @@ body {
 
 /* Ensure the container grows beyond the viewport */
 .plate {
-  width: 270px; /* Set a fixed width for the circle */
-  height: 270px; /* Set a fixed height for the circle */
+  width: 250px; /* Set a fixed width for the circle */
+  height: 250px; /* Set a fixed height for the circle */
   border-radius: 50%; /* Make it circular */
   /* background-color: #eaaac4; Circle background color */
   color: white; /* Text color */
@@ -276,7 +276,7 @@ body {
 .content-title,
 .content-description,
 .tags {
-  opacity: 0; /* Initially hidden */
+  opacity: 1; /* Initially hidden */
   transform: translateY(30px); /* Start from slightly below */
   transition: opacity 0.8s ease, transform 0.8s ease; /* Smooth transition */
 }
@@ -295,6 +295,7 @@ body {
 
 /* Additional styles to improve aesthetics */
 .tags span {
+  /* opacity: 0; */
   display: inline-block;
   /* background-color: #f0e68c; Soft yellow background */
   padding: 5px 10px;
@@ -414,3 +415,242 @@ body {
 .hidden {
   display: none;
 }
+
+
+.chole-puri-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  /* max-width: 800px; */
+  margin: 0 auto;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.carousel-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.carousel-slide {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 200px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.details h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.interaction {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.like {
+  font-size: 18px;
+}
+
+.cook-button {
+  background-color: #7ed957;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.tags {
+  display: flex;
+  position: relative;
+  top: -10px;
+  left: 90px;
+  gap: 8px;
+  opacity: 1;
+  margin-top: 10px;
+  max-width: 500px;
+}
+
+.tag {
+  background-color: #654321;
+  color: white;
+  font-size: 20px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  width: 8vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.steps-title {
+/* Center the title */
+}
+
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-height: 250px;
+  overflow-x: auto; /* Allow horizontal scrolling */
+  gap: 20px; /* Space between steps */
+  padding: 10px 0;
+  scrollbar-width: thin; /* For Firefox */
+}
+
+.steps::-webkit-scrollbar {
+  height: 8px; /* Height of horizontal scrollbar */
+}
+
+.steps::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5); /* Scrollbar color */
+  border-radius: 4px; /* Rounded edges */
+}
+.step {
+  border: 2px solid black; /* Light border for subtlety */
+  width: 15vw;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 25px;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  transition: transform 0.3s, border-color 0.3s; /* Smooth scaling and border color transition on hover */
+  overflow: hidden; /* Prevent overflow of content */
+  position: relative; /* Enable positioning for absolute elements */
+}
+
+.step:hover {
+  transform: scale(1.05) translateY(5px); /* Slightly enlarge and drop down on hover */
+  border-color: white; /* Change border color to white on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Increase shadow depth on hover */
+}
+
+
+.step img {
+  width: 100%; /* Full width to ensure it covers the step */
+  height: 100%; /* Full height to fill the container */
+  border-radius: 10px;
+  object-fit: cover; /* Maintain aspect ratio and cover the area */
+}
+
+.step-text {
+  position: absolute; /* Positioning for text overlay */
+  bottom: 0; /* Position text near the bottom */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  padding: 5px 10px; /* Padding around text */
+  border-radius:  0 0 10px 10px;/* Rounded corners */
+  z-index: 1; /* Ensure text is on top */
+  width: 100%; /* Width adjustment to fit nicely */
+  color: #333; /* Text color for contrast */
+  text-align: center; /* Center text alignment */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  font-weight: bold; 
+}
+
+
+
+.step span {
+  font-size: 20px; /* Slightly larger font for better readability */
+  text-align: center;
+  color: #333; /* Darker text for contrast */
+ 
+}
+
+
+
+
+
+.carousel-slide {
+  position: relative;
+  width: 30vw;
+  height: 35vh;
+  /* overflow: hidden; */
+  left: 35px; /* Hide overflow for smoother transitions */
+ 
+  
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Maintain aspect ratio */
+  border: 2px solid #fff; /* White border for better contrast */
+  border-radius: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8); /* Drop shadow */
+  transition: transform 0.5s ease, box-shadow 0.5s ease; /* Smooth transition for effects */
+}
+
+.carousel-image:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Enhanced shadow on hover */
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  border-radius: 5px;
+}
+
+.carousel-button.prev {
+  left: 10px; /* Position the previous button */
+  opacity: 1;
+}
+
+.carousel-button.next {
+  right: 10px; /* Position the next button */
+}
+
+.button {
+  background: rgba(100, 255, 149, 1); /* Button background color */
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); /* Drop shadow */
+  border: none; /* No border */
+  color: white; /* Text color */
+  padding: 10px 20px; /* Padding for the button */
+  font-size: 16px; /* Font size */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background 0.3s ease; /* Transition for background change */
+  border-radius: 30px;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+}
+
+.button:hover {
+  background: rgba(80, 200, 120, 1); /* Slightly darker shade on hover */
+}
+
