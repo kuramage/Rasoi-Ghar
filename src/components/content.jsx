@@ -77,16 +77,16 @@ export class Content extends Component {
         </h1>
 
         {/* Animated Tags */}
-        <div className={`tags ${fadeInOutClass}`}>
+        {/* <div className={`tags ${fadeInOutClass}`}>
           <span>(veg)</span>
           <span>(biryani)</span>
           <span>(mughlai)</span>
           <span>(lunch)</span>
           <span>(uttar pradesh)</span>
-        </div>
+        </div> */}
 
         {/* Animated Description */}
-        <p className={`content-description ${fadeInOutClass}`}>
+        <p className={`content-description ${fadeInOutClass}` } style={{marginTop:"20px"}}>
           {displayedDescription}
         </p>
       </div>

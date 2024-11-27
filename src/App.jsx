@@ -12,6 +12,7 @@ import UploadPost from "./components/upload_post";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SignIn from "./components/signin.jsx";
 import Showpost from "./components/showpost.jsx";
+import Profile from "./components/profile.jsx";
 
 class App extends Component {
   // constructor(props) {
@@ -70,9 +71,10 @@ class App extends Component {
       
         <div className="flex h-screen">
           {/* <Home></Home> */}
-          
-        <Showpost/> 
+          {/* <UploadPost /> */}
+        {/* <Showpost/>  */}
         {/* <SignIn></SignIn> */}
+        <Profile></Profile>
       </div>
 
       
