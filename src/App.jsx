@@ -70,11 +70,11 @@ class App extends Component {
       // </div>
       
         <div className="flex h-screen">
-          {/* <Home></Home> */}
+          <Home></Home>
           {/* <UploadPost /> */}
         {/* <Showpost/>  */}
         {/* <SignIn></SignIn> */}
-        <Profile></Profile>
+        {/* <Profile></Profile> */}
       </div>
 
       
