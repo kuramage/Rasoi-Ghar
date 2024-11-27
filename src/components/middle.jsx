@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import logo from "./logo.png";
+
 const Middle = ({ dishName, description, updateDish, updateHoverState }) => {
   const [hoveredPostIndex, setHoveredPostIndex] = useState(null);
 
@@ -35,19 +36,73 @@ const Middle = ({ dishName, description, updateDish, updateHoverState }) => {
 
             return (
               <div
-                className={`post post-${colIndex + 1} ${
-                  isHovered ? "hover" : ""
-                }`} // Apply hover class to the post
+                className={`post post-${colIndex + 1} ${isHovered ? "hover" : ""}`} // Apply hover class to the post
                 key={postIndex}
+                style={{ position: "relative" }} // Relative positioning for absolute children
               >
                 <div
                   className={`plate ${isHovered ? "hovered" : ""}`} // Apply hovered class on the plate
                   onMouseOver={() => handlePlateHover(currentIndex)} // Handle hover on plate
                   onMouseLeave={handlePlateLeave} // Handle leave on plate
+                  style={{ position: "relative"}}
                 >
                   <img src="/" alt="Dish" />
+                  {/* Add 3 stacked cards over the plate */}
+                  <div
+                    className="card card-1"
+                    style={{
+                      position: "absolute",
+                      top: "30px",
+                      left: "50px",
+                      zIndex: 3,
+                      backgroundColor: "#fff",
+                      padding: "10px",
+                      borderRadius: "5px",
+                      boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
+                      width:"7rem",
+                      height:"7rem",
+                      transform: "rotate(-5deg)",
+                    }}
+                  >
+                    Card 1
+                  </div>
+                  <div
+                    className="card card-2"
+                    style={{
+                      position: "absolute",
+                      top: "50px",
+                      left: "50px",
+                      zIndex: 2,
+                      backgroundColor: "#fff",
+                      padding: "10px",
+                      borderRadius: "5px",
+                      boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
+                      width:"7rem",
+                      height:"7rem",
+                      transform: "rotate(5deg)",
+                    }}
+                  >
+                    Card 2
+                  </div>
+                  <div
+                    className="card card-3"
+                    style={{
+                      position: "absolute",
+                      top: "70px",
+                      left: "50px",
+                      zIndex: 1,
+                      backgroundColor: "#fff",
+                      padding: "10px",
+                      borderRadius: "5px",
+                      boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
+                      width:"7rem",
+                      height:"7rem",
+                      transform: "rotate(15deg)",
+                    }}
+                  >
+                    Card 3
+                  </div>
                 </div>
-                {/* <p style={{ fontSize: "20px" }}>❤️ 52</p> */}
               </div>
             );
           })}
