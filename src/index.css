@@ -250,8 +250,8 @@ body {
 
 /* Ensure the container grows beyond the viewport */
 .plate {
-  width: 250px; /* Set a fixed width for the circle */
-  height: 250px; /* Set a fixed height for the circle */
+  width: 230px; /* Set a fixed width for the circle */
+  height: 230px; /* Set a fixed height for the circle */
   border-radius: 50%; /* Make it circular */
   /* background-color: #eaaac4; Circle background color */
   color: white; /* Text color */
