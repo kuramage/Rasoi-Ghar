@@ -20,59 +20,26 @@ const errorResponse = (res, status, message) => {
     res.status(status).json({ message });
 };
 
-// Route to add a recipe
-router.post("/", async (req, res) => {
-    const {
-        stepsVideos,
-        stepsNotes,
-        stepsIngredients,
-        userId,
-        recipeName,
-        stepsTitles,
-    } = req.body;
-
-    // Validate input
-    if (
-        !recipeName ||
-        !Array.isArray(stepsVideos) ||
-        !Array.isArray(stepsNotes) ||
-        !Array.isArray(stepsTitles) ||
-        !userId ||
-        !Array.isArray(stepsIngredients) || // Validate it's an array
-        !stepsIngredients.every((step) => Array.isArray(step)) // Validate it's a 2D array
-    ) {
-        return errorResponse(res, 400, "Invalid input. Please provide all required fields.");
-    }
-
+// Route to fetch all recipes
+router.get("/", async (req, res) => {
     try {
-        // Generate a UUID for recipeId
-        const recipeId = uuidv4();
-
-        // Insert recipe data into the Supabase table
+        // Fetch specific fields from the Recipe table
         const { data, error } = await supabase
             .from("Recipe")
-            .insert([
-                {
-                    recipeId, // Auto-generated UUID
-                    stepsVideos,
-                    stepsNotes,
-                    stepsIngredients, // Accept 2D JSON array
-                    userId,
-                    recipeName,
-                    stepsTitles,
-                    recipeLikes: [], // Initialize recipeLikes as an empty array
-                },
-            ])
-            .select();
+            .select("userId, recipeName, recipeLikes, recipeImages, recipeDescription");
 
         if (error) {
-            console.error("Error inserting recipe:", error.message);
-            return errorResponse(res, 500, "Failed to add recipe.");
+            console.error("Error fetching recipes:", error.message);
+            return errorResponse(res, 500, "Failed to fetch recipes.");
         }
 
-        return successResponse(res, "Recipe added successfully!", data[0]);
+        if (data.length === 0) {
+            return successResponse(res, "No recipes found.", []);
+        }
+
+        return successResponse(res, "Recipes fetched successfully!", data);
     } catch (err) {
-        console.error("Error during recipe creation:", err.message);
+        console.error("Error during fetching recipes:", err.message);
         return errorResponse(res, 500, "Internal server error.");
     }
 });

@@ -26,21 +26,53 @@ const errorResponse = (res, status, message) => {
 
 // Sign-up route
 router.post("/signup", async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, userName } = req.body;
 
     // Validate input
-    if (!email || !password) {
-        return errorResponse(res, 400, "Email and password are required.");
+    if (!email || !password || !userName) {
+        return errorResponse(res, 400, "Email, password, and userName are required.");
     }
 
     try {
-        const { data, error } = await supabase.auth.signUp({ email, password });
+        // Step 1: Create the user in Supabase Auth
+        const { data: authData, error: authError } = await supabase.auth.signUp({
+            email,
+            password,
+        });
 
-        if (error) {
-            return errorResponse(res, 400, error.message);
+        if (authError) {
+            // Check if the error is due to duplicate email
+            if (authError.message.includes("already registered")) {
+                return successResponse(res, "User already exists.", {
+                    email: email,
+                });
+            }
+            return errorResponse(res, 400, authError.message);
         }
 
-        return successResponse(res, "Sign-up successful!", data);
+        // Step 2: Insert user details into the `userDetails` table
+        const userId = authData.user?.id; // Supabase automatically generates a user ID
+        const { error: insertError } = await supabase
+            .from("userDetails")
+            .insert([
+                {
+                    userId: userId,
+                    userRecipes: [], // Initialize as an empty array
+                    userName: userName,
+                    userImage: "https://www.reshot.com/preview-assets/icons/DUYKGBF2XM/hot-food-DUYKGBF2XM.svg", // Initialize as an empty string
+                },
+            ]);
+
+        if (insertError) {
+            console.error("Error inserting into userDetails:", insertError.message);
+            return errorResponse(res, 500, "Failed to save user details.");
+        }
+
+        return successResponse(res, "Sign-up successful!", {
+            userId: userId,
+            email: email,
+            userName: userName,
+        });
     } catch (err) {
         console.error("Error during sign-up:", err.message);
         return errorResponse(res, 500, "Internal server error.");
