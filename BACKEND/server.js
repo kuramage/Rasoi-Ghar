@@ -1,14 +1,12 @@
-// server.js
-
-
-
 import express from "npm:express";
 import cors from "npm:cors";
 import dotenv from "npm:dotenv"; // For environment variables
 import authRoutes from "./authRoutes.js"; // Import auth routes
 import recipesRoutes from "./recipesRoutes.js"; // Import recipes routes
 import ingredientRoutes from "./ingredientRoutes.js"; // Import ingredient routes
-import stepsVideosRouter from "./stepsVideos.js"; // Import videos routes
+import stepsVideosRouter from "./stepsVideosRoutes.js"; // Import videos routes
+import recipeImagesRouter from "./recipeImagesRoutes.js"; // Import image routes
+import userRoutes from "./userRoutes.js"; // Import user routes
 
 // Load environment variables
 dotenv.config();
@@ -33,6 +31,12 @@ app.use("/ingredients", ingredientRoutes);
 
 // Use the video routes
 app.use("/stepsVideos", stepsVideosRouter);
+
+// Use the image routes
+app.use("/recipeImages", recipeImagesRouter);
+
+// Use the user routes
+app.use("/user", userRoutes);  // Add this line to use user routes
 
 // 404 Route Handling
 app.use((req, res) => {
