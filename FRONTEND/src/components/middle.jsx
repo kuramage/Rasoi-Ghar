@@ -53,8 +53,8 @@ const Middle = ({ dishes, updateDish, updateHoverState }) => {
                     src={firstImageUrl || "https://via.placeholder.com/100"} // Fallback to placeholder image if no URL
                     alt={dish.recipeName}
                     style={{
-                      width: "100px",
-                      height: "100px",
+                      width: "190px",
+                      height: "190px",
                       objectFit: "cover",
                       borderRadius: "50%",
                       border: "3px solid #ddd",
@@ -69,7 +69,7 @@ const Middle = ({ dishes, updateDish, updateHoverState }) => {
                       textAlign: "center",
                     }}
                   >
-                    <h3 style={{ fontSize: "14px", margin: 0 }}>{dish.recipeName}</h3>
+                   
                   </div>
                 </div>
               </div>

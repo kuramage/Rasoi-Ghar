@@ -58,9 +58,9 @@ export class Content extends Component {
         <h1
           className={`content-title ${fadeInOutClass}`}
           style={{
-            fontSize: "60px",
+            fontSize: "55px",
             lineHeight: "80px",
-            marginBottom: "5px",
+            marginBottom: "8px",
             transition: "opacity 0.5s", // Smooth transition for opacity
           }}
         >
