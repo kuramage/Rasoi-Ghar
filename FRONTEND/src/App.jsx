@@ -1,14 +1,20 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import { useUser } from '@supabase/auth-helpers-react';
-import SignIn from "./components/signin";
+import { SignIn } from "./components/signin";
 import Home from "./components/home.jsx";
 import Sidebar from "./components/sidebar";
 import Upload from "./components/upload";
 import Profile from "./components/profile";
 
+// Replace useUser with your own authentication logic
+const useAuth = () => {
+    // Placeholder authentication logic
+    const user = JSON.parse(localStorage.getItem("user")); // Example: Fetch user from local storage
+    return user;
+};
+
 function App() {
-    const user = useUser(); // Get the current user
+    const user = useAuth(); // Get the current user
 
     console.log(user);
 

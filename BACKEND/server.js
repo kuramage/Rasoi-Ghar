@@ -1,5 +1,7 @@
 // server.js
 
+
+
 import express from "npm:express";
 import cors from "npm:cors";
 import dotenv from "npm:dotenv"; // For environment variables
@@ -14,8 +16,10 @@ dotenv.config();
 const app = express();
 const port = Deno.env.get("PORT") || 5000;
 
-// Enable CORS with a specific origin (replace with your frontend's URL)
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({
+    origin: ["http://localhost:5000", "http://localhost:5173"]
+}));
+
 app.use(express.json());
 
 // Use the auth routes
