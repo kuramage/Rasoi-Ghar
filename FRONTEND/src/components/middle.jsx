@@ -1,106 +1,75 @@
 import React, { useState } from "react";
-import logo from "./logo.png";
 
-const Middle = ({ dishName, description, updateDish, updateHoverState }) => {
-  const [hoveredPostIndex, setHoveredPostIndex] = useState(null);
+const Middle = ({ dishes, updateDish, updateHoverState }) => {
+  const [hoveredDishIndex, setHoveredDishIndex] = useState(null);
 
-  const handlePlateHover = (index) => {
-    setHoveredPostIndex(index); // Set the hovered index for the plate
-    updateHoverState(true); // Notify the parent component
+  // Handle hover on plate
+  const handlePlateHover = (index, dish) => {
+    setHoveredDishIndex(index); // Set the hovered dish index
+    updateHoverState(true); // Notify parent component of hover
+    updateDish(dish); // Pass the hovered dish to the parent
   };
 
+  // Handle hover leave
   const handlePlateLeave = () => {
-    setHoveredPostIndex(null); // Reset the hovered index
-    updateHoverState(false); // Notify the parent component
+    setHoveredDishIndex(null); // Reset hovered index
+    updateHoverState(false); // Notify parent component of hover leave
   };
 
-  const posts = Array.from({ length: 21 }, (_, index) => `Post ${index + 1}`);
+  // Create columns with cyclic assignment of recipes (3 columns)
   const columns = [[], [], []];
-
-  posts.forEach((post, index) => {
-    columns[index % 3].push(post);
+  dishes.forEach((dish, index) => {
+    columns[index % 3].push(dish);
   });
 
   return (
-    <div className="container">
+    <div className="container" style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
       {columns.map((col, colIndex) => (
-        <div className={`column column-${colIndex + 1}`} key={colIndex}>
+        <div className={`column column-${colIndex + 1}`} key={colIndex} style={{ width: "30%" }}>
           {colIndex === 1 && (
             <div className="top-box" style={{ marginBottom: "1px" }}>
               <h2>This is a Box at the Top of Column 2</h2>
             </div>
           )}
-          {col.map((post, postIndex) => {
+
+          {col.map((dish, postIndex) => {
             const currentIndex = `${colIndex}-${postIndex}`;
-            const isHovered = hoveredPostIndex === currentIndex;
+            const isHovered = hoveredDishIndex === currentIndex;
+            const firstImageUrl = dish.recipeImages && dish.recipeImages[0]; // Get the first image URL
 
             return (
               <div
-                className={`post post-${colIndex + 1} ${isHovered ? "hover" : ""}`} // Apply hover class to the post
+                className={`post post-${colIndex + 1} ${isHovered ? "hover" : ""}`}
                 key={postIndex}
-                style={{ position: "relative" }} // Relative positioning for absolute children
+                style={{ position: "relative", marginBottom: "20px" }}
               >
                 <div
-                  className={`plate ${isHovered ? "hovered" : ""}`} // Apply hovered class on the plate
-                  onMouseOver={() => handlePlateHover(currentIndex)} // Handle hover on plate
-                  onMouseLeave={handlePlateLeave} // Handle leave on plate
-                  style={{ position: "relative"}}
+                  className={`plate ${isHovered ? "hovered" : ""}`}
+                  onMouseOver={() => handlePlateHover(currentIndex, dish)}
+                  onMouseLeave={handlePlateLeave}
+                  style={{ position: "relative", cursor: "pointer", textAlign: "center" }}
                 >
-                  <img src="/" alt="Dish" />
-                  {/* Add 3 stacked cards over the plate */}
+                  <img
+                    src={firstImageUrl || "https://via.placeholder.com/100"} // Fallback to placeholder image if no URL
+                    alt={dish.recipeName}
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                      objectFit: "cover",
+                      borderRadius: "50%",
+                      border: "3px solid #ddd",
+                    }}
+                  />
                   <div
-                    className="card card-1"
                     style={{
                       position: "absolute",
-                      top: "30px",
-                      left: "50px",
-                      zIndex: 3,
-                      backgroundColor: "#fff",
-                      padding: "10px",
-                      borderRadius: "5px",
-                      boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
-                      width:"7rem",
-                      height:"7rem",
-                      transform: "rotate(-5deg)",
+                      top: "120px",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      textAlign: "center",
                     }}
                   >
-                    Card 1
-                  </div>
-                  <div
-                    className="card card-2"
-                    style={{
-                      position: "absolute",
-                      top: "50px",
-                      left: "50px",
-                      zIndex: 2,
-                      backgroundColor: "#fff",
-                      padding: "10px",
-                      borderRadius: "5px",
-                      boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
-                      width:"7rem",
-                      height:"7rem",
-                      transform: "rotate(5deg)",
-                    }}
-                  >
-                    Card 2
-                  </div>
-                  <div
-                    className="card card-3"
-                    style={{
-                      position: "absolute",
-                      top: "70px",
-                      left: "50px",
-                      zIndex: 1,
-                      backgroundColor: "#fff",
-                      padding: "10px",
-                      borderRadius: "5px",
-                      boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
-                      width:"7rem",
-                      height:"7rem",
-                      transform: "rotate(15deg)",
-                    }}
-                  >
-                    Card 3
+                    <h3 style={{ fontSize: "14px", margin: 0 }}>{dish.recipeName}</h3>
                   </div>
                 </div>
               </div>
