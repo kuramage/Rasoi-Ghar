@@ -5,15 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da1e3d46-a733-4499-8d01-53cf38f7bc07" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BACKEND/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BACKEND/authRoutes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BACKEND/ingredientRoutes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BACKEND/recipesRoutes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BACKEND/server.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BACKEND/notes.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BACKEND/stepsVideos.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BACKEND/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/src/main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/src/supabaseConfig.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.env" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/deno.json" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/deno.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/deno.lock" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/deno.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/recipesRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/recipesRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +66,7 @@
       <updated>1734098200046</updated>
       <workItem from="1734098201332" duration="1877000" />
       <workItem from="1734102293166" duration="2645000" />
-      <workItem from="1734106500846" duration="17014000" />
+      <workItem from="1734106500846" duration="31300000" />
     </task>
     <servers />
   </component>

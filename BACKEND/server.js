@@ -3,15 +3,14 @@
 import express from "npm:express";
 import cors from "npm:cors";
 import dotenv from "npm:dotenv"; // For environment variables
-import authRoutes from './authRoutes.js';  // Import auth routes
-import recipesRoutes from './recipesRoutes.js';  // Import recipes routes
-import ingredientRoutes from './ingredientRoutes.js'; // Import ingredient routes
+import authRoutes from "./authRoutes.js"; // Import auth routes
+import recipesRoutes from "./recipesRoutes.js"; // Import recipes routes
+import ingredientRoutes from "./ingredientRoutes.js"; // Import ingredient routes
+import stepsVideosRouter from "./stepsVideos.js"; // Import videos routes
 
 // Load environment variables
 dotenv.config();
 
-
-// Create an instance of express
 const app = express();
 const port = Deno.env.get("PORT") || 5000;
 
@@ -27,6 +26,9 @@ app.use("/recipes", recipesRoutes);
 
 // Use the ingredient routes
 app.use("/ingredients", ingredientRoutes);
+
+// Use the video routes
+app.use("/stepsVideos", stepsVideosRouter);
 
 // 404 Route Handling
 app.use((req, res) => {
