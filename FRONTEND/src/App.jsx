@@ -1,43 +1,39 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import { SignIn } from "./components/signin";
-import Home from "./components/home.jsx";
+import SignIn from "./components/signin";
+import Home from "./components/home";
 import Sidebar from "./components/sidebar";
 import Upload from "./components/upload";
 import Profile from "./components/profile";
 
-// Replace useUser with your own authentication logic
 const useAuth = () => {
-    // Placeholder authentication logic
-    const user = JSON.parse(localStorage.getItem("user")); // Example: Fetch user from local storage
-    return user;
+    const user = localStorage.getItem("user");
+    try {
+        return user ? JSON.parse(user) : null;
+    } catch (e) {
+        console.error("Error parsing user data:", e);
+        return null;
+    }
 };
 
 function App() {
-    const user = useAuth(); // Get the current user
-
+    const user = useAuth();
     console.log(user);
 
     return (
         <Router>
             <div className="app">
-                {/* Show Sidebar only if user is logged in */}
+                {/* Conditionally render Sidebar if user is authenticated */}
                 {user && <Sidebar />}
 
                 <Routes>
-                    {/* Root route redirects to /home if user is logged in, otherwise to /signin */}
-                    <Route path="/" element={<Navigate to={user ? "/home" : "/signin"} />} />
+                    {/* Redirect root to appropriate page */}
+                    <Route path="/" element={<Navigate to={user ? "/home" : "/signin"} replace />} />
 
-                    {/* SignIn route */}
+                    {/* Routes with conditional navigation based on user authentication */}
                     <Route path="/signin" element={user ? <Navigate to="/home" /> : <SignIn />} />
-
-                    {/* Home route */}
-                    <Route path="/home" element={user ? <Home /> : <Navigate to="/signin" />} />
-
-                    {/* Upload route */}
+                    <Route path="/home" element={<Home />} />
                     <Route path="/upload" element={user ? <Upload /> : <Navigate to="/signin" />} />
-
-                    {/* Profile route */}
                     <Route path="/profile" element={user ? <Profile /> : <Navigate to="/signin" />} />
                 </Routes>
             </div>
