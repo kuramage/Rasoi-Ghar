@@ -1,6 +1,4 @@
 import { Component } from "react";
-// import PropTypes from "prop-types";
-import { supabase } from '../../API/supabaseClient.js';
 import logo from "./signin.png";
 import logo2 from "./signup.png";
 
@@ -25,15 +23,24 @@ export class SignIn extends Component {
     event.preventDefault();
     const { email, password } = this.state;
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      const response = await fetch('http://localhost:5000/auth/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (error) {
-      this.setState({ message: error.message });
-    } else {
-      this.setState({ message: 'Sign in successful!' });
+      const data = await response.json();
+
+      if (response.ok) {
+        this.setState({ message: 'Sign in successful!' });
+      } else {
+        this.setState({ message: data.error || 'Sign in failed.' });
+      }
+    } catch (error) {
+      this.setState({ message: 'Error: ' + error.message });
     }
   };
 
@@ -41,22 +48,30 @@ export class SignIn extends Component {
     event.preventDefault();
     const { email, password } = this.state;
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
+    try {
+      const response = await fetch('http://localhost:5000/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (error) {
-      this.setState({ message: error.message });
-    } else {
-      this.setState({ message: 'Sign up successful!' });
+      const data = await response.json();
+
+      if (response.ok) {
+        this.setState({ message: 'Sign up successful!' });
+      } else {
+        this.setState({ message: data.error || 'Sign up failed.' });
+      }
+    } catch (error) {
+      this.setState({ message: 'Error: ' + error.message });
     }
   };
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
-
 
   render() {
     const { isSignIn, isSignUp, message} = this.state;
