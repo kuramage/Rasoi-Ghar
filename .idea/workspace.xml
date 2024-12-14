@@ -5,148 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da1e3d46-a733-4499-8d01-53cf38f7bc07" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BACKEND/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/main.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/supabaseClient.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/deno.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/deno.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eslint.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/postcss.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vite.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/react.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/a70f471f-ffff-49b0-bc57-8a53fd9da7cd.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/baking-8460297_640.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chef.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chef_hat.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/449472423_3866735920232109_7323358875943303708_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/0HB8DQerZ9F.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/299875659_374603628179428_914954171575625475_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/2pVcBgt1Ill.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/3Lx1Xx06Wl4.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/448505497_3858128971092804_4379005603028424577_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/448507369_3858128961092805_7183171150039088561_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/449836167_3874913986080969_6920399436047728691_n(1).jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/449836167_3874913986080969_6920399436047728691_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/450511163_3874912482747786_5678064553983171181_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/450531240_3874359502803084_8385367976261533039_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/450534760_3874359516136416_8524613475892946542_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/450974107_3876255579280143_8863358634394057774_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/451001535_3876255585946809_8268875681693376784_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/451330975_3875695729336128_5283717524824865108_n(1).jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/451330975_3875695729336128_5283717524824865108_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/453242993_3886933294879038_81784520709557745_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/4CmyIpADjUT.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/73VNyhIMEmT.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/7mY6yjSDTdi.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/98rYwUnBIfq.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/9IA_n2ubvUJ.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/9xI3Nrwd9Rv.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/AKt7-rFU70b.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/BNYwZswRNxd.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/ChFrp3gfNFt.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/DX_Pm0tDTTy.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/E2o5kNHSXwr.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/EaRSMhJJw6q.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/FT8jQ9HGJD9.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/HOQztTu5JYT.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/HzxD9aAXSyD.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/IsOyju8tf_N.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/J-YkPOLcrAE.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/JxaxUh9XxfY.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/L51Aw0YxmXJzo9NA3W728J7BX3QpsK4A36_RtQfr4HCEIwLNS6LoeHzaae8_kkgrzD2az_n3xIea27kMR3iD9W4hHl8oCgQXljA.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/L_q7yTw5FbKRxYRhElFlHrHHk2tUXRUJSTrNAiOcPF5ACXhQL6rXUoQmxmHiMMI2gbuwSBUqXnB_a9bg5pV8nNk5DYvatkvPhoOv7qNdkEQuz0zdoKxD1yKYGzSRE-5kmL1A3p25VaGqBnw7cdze4AneKSSQfg5g9UXi-q4u.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/MEjwZCFPKVh.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/MTJXDWGKkp0.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/QYZjANLTphq.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/RXhYkybKA9g.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/RY_3CuWHXDq.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/W_VzwMT8PJT.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/WyX32dodmf9.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/X17cuAq2QHv.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/XF1fUskiRxe.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/YT7n1sgH1lv.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/ZDnt9cFmROT.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/ZZ3f_v2tb3l.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/ZiGlLsdozn9.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/_VRI8I-VmuC.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/awf3ZrhxhWY.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/bGE75L8fvZy.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/bW0sqS-lf5f.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/bc0fOrsByS1.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/cGxo7_n9cky.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/cSZkOsjARxDWl2uIRHbtLs.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/dFLWiokgyXn.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/dfENx51snRA.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/f3JXzkahdnC.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/f9XC8CIznRN.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/fQyywdzwm6J.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/fSVg1M-0onR.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/i9cJJLX4TaND7SdT_6JSS0dkQS2chfJrKERz6pNGhHp8.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/j-AakPYHBpP.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/kXIqmzvRoJK.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/kba-JhvaDJw.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/kgmzLJLBZRn.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/lAng2WMc1zA.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/mbBmmxLQSCA.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/nKNzSXsm8jb.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/peL9mpYMNm2.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/qBMLEJqD-m2.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/qjELgtUs2ba.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/qm4IEjuINyS.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/rL-rwMlf64d.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/rRWImqL-VRZ.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/sIUfioK8p73.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/tlaFeBNNUjsVSq1Ijv_hXcvbXQU0rkn03AHen-10Fe2OkCVrg0ySjZJE7VJMQCpC2ge5xiPx6ecPd7Ap9e_CRsiaWDJYpVrilTUkn3ymHRjOEwuSq6nZCjRRY0sufcf7zQQlLiGz56kQu5P8LMaP53nsBj.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/tsqhMVo6kCH.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/vGSgEwj4UxE.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/w-zo0oHgrYC.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/wfbun4K7DbN.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/wp-kN4aMeZ8.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/xS7YPhjxetV.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/y7pOIs4kzWu.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/yQNsAFa8YzJ.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/Facebook_files/z9QVgf-nPn-.js.download" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/chole_1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/chole_2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chole/chole_3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/content.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/context.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/cross-removebg-preview.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/home.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/imageslider.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/logo2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/middle.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/panel.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/plus.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/post_content.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/profile.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/register.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/showpost.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/sidebar.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/signin.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/signin.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/signin_bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/signup.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/upload.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/upload_btn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/upload_post.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/utensils.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lakshay.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/BACKEND/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BACKEND/authRoutes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BACKEND/ingredientRoutes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BACKEND/recipesRoutes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BACKEND/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/src/main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/src/supabaseConfig.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,6 +45,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\CGAS\Rasoi-Ghar\BACKEND" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -194,7 +66,8 @@
       <option name="presentableId" value="Default" />
       <updated>1734098200046</updated>
       <workItem from="1734098201332" duration="1877000" />
-      <workItem from="1734102293166" duration="975000" />
+      <workItem from="1734102293166" duration="2645000" />
+      <workItem from="1734106500846" duration="17014000" />
     </task>
     <servers />
   </component>

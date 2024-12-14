@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import App from "./App";
 import "./index.css";
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from './supabaseConfig';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../../BACKEND/supabaseConfig.js';
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
