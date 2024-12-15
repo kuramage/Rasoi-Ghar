@@ -51,7 +51,7 @@ class Upload extends Component {
   
       try {
         // Send the video to the API
-        const response = await fetch("http://localhost:5000/stepsVideos/upload", {
+        const response = await fetch("https://rasoi-ghar.onrender.com/stepsVideos/upload", {
           method: "POST",
           body: formData,
         });
