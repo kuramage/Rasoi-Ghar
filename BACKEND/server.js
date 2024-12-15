@@ -1,6 +1,6 @@
-import express from "npm:express";
-import cors from "npm:cors";
-import dotenv from "npm:dotenv"; // For environment variables
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv"; // For environment variables
 import authRoutes from "./authRoutes.js"; // Import auth routes
 import recipesRoutes from "./recipesRoutes.js"; // Import recipes routes
 import ingredientRoutes from "./ingredientRoutes.js"; // Import ingredient routes
@@ -12,11 +12,16 @@ import userRoutes from "./userRoutes.js"; // Import user routes
 dotenv.config();
 
 const app = express();
-const port = Deno.env.get("PORT") || 5000;
+const port = process.env.PORT || 5000;
 
-app.use(cors({
-    origin: ["http://localhost:5000", "http://localhost:5173","https://rasoi-ghar.onrender.com"]
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5000",
+      "http://localhost:5173",
+    ],
+  })
+);
 
 app.use(express.json());
 
@@ -36,20 +41,20 @@ app.use("/stepsVideos", stepsVideosRouter);
 app.use("/recipeImages", recipeImagesRouter);
 
 // Use the user routes
-app.use("/user", userRoutes);  // Add this line to use user routes
+app.use("/user", userRoutes);
 
 // 404 Route Handling
 app.use((req, res) => {
-    res.status(404).json({ message: "Route not found." });
+  res.status(404).json({ message: "Route not found." });
 });
 
 // Global Error Handler
 app.use((err, req, res, next) => {
-    console.error("Unhandled error:", err.message);
-    res.status(500).json({ message: "Internal server error." });
+  console.error("Unhandled error:", err.message);
+  res.status(500).json({ message: "Internal server error." });
 });
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
