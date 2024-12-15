@@ -5,6 +5,7 @@ import Home from "./components/home";
 import Sidebar from "./components/sidebar";
 import Upload from "./components/upload";
 import Profile from "./components/profile";
+import Showpost from "./components/showpost";
 import UploadPost from "./components/upload_post";
 
 const useAuth = () => {
@@ -35,6 +36,7 @@ function App() {
                     <Route path="/signin" element={user ? <Navigate to="/home" /> : <SignIn />} />
                     <Route path="/home" element={<Home />} />
                     <Route path="/upload" element={ <UploadPost /> } />
+                    <Route path="/showpost" element={ <Showpost /> } />
                     <Route path="/profile" element={ <Profile /> }/>
                 </Routes>
             </div>
