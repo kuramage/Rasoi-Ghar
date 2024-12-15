@@ -11,6 +11,7 @@ class Upload extends Component {
     this.state = {
       title: "",
       videoUrl: null,
+      videoLink: "", // Added videoLink state
       notes: "",
       isEditingNotes: false,
       searchQuery: "",
@@ -37,13 +38,41 @@ class Upload extends Component {
     this.props.onTitleChange(newTitle);
   };
 
-  handleFileChange = (event) => {
+  handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
+      // Generate a temporary URL for video preview
       const videoUrl = URL.createObjectURL(file);
       this.setState({ videoUrl });
+  
+      // Prepare form data for the API request
+      const formData = new FormData();
+      formData.append("video", file);
+  
+      try {
+        // Send the video to the API
+        const response = await fetch("http://localhost:5000/stepsVideos/upload", {
+          method: "POST",
+          body: formData,
+        });
+  
+        if (!response.ok) {
+          throw new Error("Failed to upload video. Please try again.");
+        }
+  
+        const data = await response.json();
+        const videoLink = data.videoUrl;
+  
+        // Save the returned video URL in the state
+        this.setState({ videoLink });
+        alert("Video uploaded successfully!");
+      } catch (error) {
+        console.error("Error uploading video:", error.message);
+        alert(error.message);
+      }
     }
   };
+  
 
   handlePlusClick = () => {
     this.setState({ isEditingNotes: true, notes: "" });
@@ -72,15 +101,21 @@ class Upload extends Component {
     }));
   };
 
+  // Method to handle videoLink input change
+  handleVideoLinkChange = (event) => {
+    this.setState({ videoLink: event.target.value });
+  };
+
   // This method will be called by the Panel to save a new step
   handleAddStep = () => {
-    const { title, videoUrl, notes, selectedIngredients } = this.state;
-    const newData = { title, videoUrl, description: notes, ingredients: selectedIngredients };
+    const { title, videoUrl, videoLink, notes, selectedIngredients } = this.state;
+    const newData = { title, videoUrl, videoLink, description: notes, ingredients: selectedIngredients };
 
     this.setState((prevState) => ({
       dataArray: [...prevState.dataArray, newData],
       title: "",
       videoUrl: null,
+      videoLink: "", // Reset the videoLink after adding a step
       notes: "",
       selectedIngredients: [],
       isEditingNotes: false,
@@ -89,12 +124,13 @@ class Upload extends Component {
 
   // Method to handle selecting an entry from Panel
   handleSelectIndex = (index) => {
-    if (index === this.state.dataArray.length ) {
+    if (index === this.state.dataArray.length) {
       // Reset all fields to initial state if the latest entry is selected
       this.setState({
         currentIndex: index,
         title: "",
         videoUrl: null,
+        videoLink: "",
         notes: "",
         selectedIngredients: [],
         isEditingNotes: false,
@@ -105,18 +141,19 @@ class Upload extends Component {
         currentIndex: index,
         title: selectedData.title,
         videoUrl: selectedData.videoUrl,
+        videoLink: selectedData.videoLink, // Set the videoLink if it exists
         notes: selectedData.description,
         selectedIngredients: selectedData.ingredients,
         isEditingNotes: selectedData.description ? true : false,
       });
     }
   };
-  
 
   render() {
     const {
       title,
       videoUrl,
+      videoLink, // Add videoLink to destructuring
       isEditingNotes,
       notes,
       searchQuery,
@@ -169,6 +206,23 @@ class Upload extends Component {
             </>
           )}
         </div>
+
+        {/* Video Link Section */}
+        {/* <div className="video-link-section mb-6">
+          <input
+            type="text"
+            placeholder="Enter video URL"
+            value={videoLink}
+            onChange={this.handleVideoLinkChange}
+            style={{
+              padding: "10px",
+              border: "1px solid #ccc",
+              borderRadius: "5px",
+              width: "100%",
+              marginBottom: "10px",
+            }}
+          />
+        </div> */}
 
         {/* Notes and Ingredients Section */}
         <div className="below" style={{ display: "flex", justifyContent: "space-between", height: "40vh" }}>
@@ -225,7 +279,6 @@ class Upload extends Component {
               onChange={this.handleSearchChange}
               placeholder="Search ingredients"
               className="border rounded-lg p-2 w-full mb-2  border-gray-300"
-              
             />
 
             {suggestions.length > 0 && (
@@ -239,41 +292,7 @@ class Upload extends Component {
             )}
           </div>
         </div>
-
-        {/* Display Previous Entries
-        <div className="mt-4">
-          <h2>Saved Entries:</h2>
-          <ul>
-            {dataArray.map((data, index) => (
-              <li
-                key={index}
-                onClick={() => this.handleSelectIndex(index)}
-                style={{ cursor: "pointer", padding: "5px", border: "1px solid #ccc", marginBottom: "5px" }}
-              >
-                {data.title ? data.title : "Untitled"}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Display Selected Data */}
-        {/* {currentData.title && (
-          <div>
-            <h2>Current Entry:</h2>
-            <h3>{currentData.title}</h3>
-            <video controls style={{ width: "100%" }}>
-              <source src={currentData.videoUrl} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-            <p>{currentData.description}</p>
-            <ul>
-              {currentData.ingredients.map((ingredient, idx) => (
-                <li key={idx}>{ingredient}</li>
-              ))}
-            </ul>
-          </div>
-        )} */}
-      </div>  
+      </div>
     );
   }
 }

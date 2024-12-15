@@ -4,6 +4,13 @@ import PropTypes from "prop-types";
 function Panel({ onStepSelect, uploadRef, title }) {
   const [steps, setSteps] = useState([1]);
   const [stepTitles, setStepTitles] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    images: [null, null, null], // For storing the three images
+    imageUploaded: [false, false, false], // Track upload status
+  });
 
   useEffect(() => {
     if (steps.length === 0) {
@@ -30,9 +37,44 @@ function Panel({ onStepSelect, uploadRef, title }) {
     }
   };
 
+  // Handle modal visibility
+  const openModal = () => setModalVisible(true);
+  const closeModal = () => setModalVisible(false);
+
+  // Handle form data changes (title, description, and images)
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleImageChange = (e, index) => {
+    const file = e.target.files[0];
+    const newImages = [...formData.images];
+    const newImageUploadedStatus = [...formData.imageUploaded];
+    
+    newImages[index] = file;
+    newImageUploadedStatus[index] = true; // Mark as uploaded
+    setFormData((prev) => ({
+      ...prev,
+      images: newImages,
+      imageUploaded: newImageUploadedStatus,
+    }));
+  };
+
+  // Handle form submission (for the modal)
+  const handleSubmit = () => {
+    // Implement the form submission logic (e.g., save the data)
+    console.log("Form Data Submitted:", formData);
+
+    // Close the modal after submission
+    closeModal();
+  };
+
   return (
-    <div className="w-1/5 p-5 flex flex-col items-start space-y-4" style={{ background: "#E6CDA4",
-      boxShadow: "5px 0 10px rgba(0, 0, 0, 0.3)",  }}>
+    <div className="w-1/5 p-5 flex flex-col items-start space-y-4" style={{ background: "#E6CDA4", boxShadow: "5px 0 10px rgba(0, 0, 0, 0.3)" }}>
       <h2 className="font-bold">Steps:</h2>
       <div style={{ position: "relative", width: "100%" }}>
         {steps.map((step, index) => (
@@ -107,29 +149,114 @@ function Panel({ onStepSelect, uploadRef, title }) {
       >
         Add Step +
       </button>
+
+      {/* Update Button to Open Modal */}
       <button
-          className="jetbrains-mono bg-white border py-1 rounded-lg"
-          style={{
-            background: "linear-gradient(90deg, #FFFFFF 0%, #E6CDA4 100%)",
-            width: "185px",
-            height: "49px",
-            display: "flex",
-            justifyContent: "center",
-            fontSize: "25px",
-            border: "1px solid",
-            borderRadius: "16px",
-            filter: "drop-shadow(0 3px 2px rgba(0, 0, 0, 0.3))",
-            transition: "background 0.3s ease" // Smooth transition for background change
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = "linear-gradient(90deg, #E6CDA4 0%, #FFFFFF 100%)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "linear-gradient(90deg, #FFFFFF 0%, #E6CDA4 100%)";
-          }}
-        >
-          Upload
+        className="jetbrains-mono bg-white border py-1 rounded-lg"
+        style={{
+          background: "linear-gradient(90deg, #FFFFFF 0%, #E6CDA4 100%)",
+          width: "185px",
+          height: "49px",
+          display: "flex",
+          justifyContent: "center",
+          fontSize: "25px",
+          border: "1px solid",
+          borderRadius: "16px",
+          filter: "drop-shadow(0 3px 2px rgba(0, 0, 0, 0.3))",
+          transition: "background 0.3s ease", // Smooth transition for background change
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = "linear-gradient(90deg, #E6CDA4 0%, #FFFFFF 100%)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = "linear-gradient(90deg, #FFFFFF 0%, #E6CDA4 100%)";
+        }}
+        onClick={openModal} // Open modal on click
+      >
+        Update
       </button>
+
+      {/* Modal for Updating Step */}
+      {modalVisible && (
+        <div className="modal" style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0, 0, 0, 0.5)", zIndex: 999 }}>
+          <div className="modal-content" style={{ margin: "50px auto", background: "white", padding: "20px", width: "500px", borderRadius: "8px" }}>
+            <div>
+              <label>Title</label>
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleInputChange}
+                placeholder="Enter title"
+                style={{ width: "100%", padding: "10px", marginBottom: "10px", borderRadius: "5px",border:"1px solid black" }}
+              />
+            </div>
+            <div>
+              <label>Description</label>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+                placeholder="Enter description"
+                style={{ width: "100%", padding: "10px", marginBottom: "10px", borderRadius: "5px", height: "100px",border:"1px solid black" }}
+              />
+            </div>
+            <div>
+              <label>Image 1</label>
+              <input type="file" onChange={(e) => handleImageChange(e, 0)} style={{ marginBottom: "10px",marginLeft:"15px" }} />
+              {formData.imageUploaded[0] && <span style={{ color: "green", fontSize: "20px", marginLeft: "10px" }}>✔️</span>}
+            </div>
+            <div>
+              <label>Image 2</label>
+              <input type="file" onChange={(e) => handleImageChange(e, 1)} style={{ marginBottom: "10px",marginLeft:"15px" }} />
+              {formData.imageUploaded[1] && <span style={{ color: "green", fontSize: "20px", marginLeft: "10px" }}>✔️</span>}
+            </div>
+            <div>
+              <label>Image 3</label>
+              <input type="file" onChange={(e) => handleImageChange(e, 2)} style={{ marginBottom: "10px",marginLeft:"15px" }} />
+              {formData.imageUploaded[2] && <span style={{ color: "green", fontSize: "20px", marginLeft: "10px" }}>✔️</span>}
+            </div>
+            <button
+  onClick={handleSubmit}
+  style={{
+    backgroundColor: "#E6CDA4",
+    padding: "10px 20px",
+    borderRadius: "5px",
+    fontSize: "18px",
+    width: "100%",
+    cursor: "pointer",
+    transition: "all 0.3s ease", // Smooth transition for hover effects
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.backgroundColor = "#D0B28F"; // Darker shade on hover
+    e.currentTarget.style.transform = "scale(1.05)"; // Slightly enlarge the button
+    e.currentTarget.style.boxShadow = "0px 4px 8px rgba(0, 0, 0, 0.2)"; // Add shadow effect
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.backgroundColor = "#E6CDA4"; // Reset background color
+    e.currentTarget.style.transform = "scale(1)"; // Reset size
+    e.currentTarget.style.boxShadow = "none"; // Remove shadow
+  }}
+>
+  Submit
+</button>
+
+            <button
+              onClick={closeModal}
+              style={{
+                marginTop: "10px",
+                backgroundColor: "red",
+                padding: "5px 10px",
+                borderRadius: "5px",
+                color: "white",
+                cursor: "pointer",
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -152,6 +279,7 @@ Panel.defaultProps = {
 };
 
 export default Panel;
+
 
 
 

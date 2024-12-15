@@ -5,6 +5,7 @@ import Home from "./components/home";
 import Sidebar from "./components/sidebar";
 import Upload from "./components/upload";
 import Profile from "./components/profile";
+import UploadPost from "./components/upload_post";
 
 const useAuth = () => {
     const user = localStorage.getItem("user");
@@ -33,8 +34,8 @@ function App() {
                     {/* Routes with conditional navigation based on user authentication */}
                     <Route path="/signin" element={user ? <Navigate to="/home" /> : <SignIn />} />
                     <Route path="/home" element={<Home />} />
-                    <Route path="/upload" element={user ? <Upload /> : <Navigate to="/signin" />} />
-                    <Route path="/profile" element={user ? <Profile /> : <Navigate to="/signin" />} />
+                    <Route path="/upload" element={ <UploadPost /> } />
+                    <Route path="/profile" element={ <Profile /> }/>
                 </Routes>
             </div>
         </Router>
