@@ -11,7 +11,8 @@ export class Home extends Component {
       dishName: "Dal Makhni", // Default dish name
       description: "Dal makhani is an Indian dish originating in Delhi. A relatively modern variation of traditional lentil dishes, it is made with urad dal and other pulses, and includes butter and cream.",
       isHovered: false, // Hover state
-      dishes: [] // Store all fetched dishes
+      dishes: [], // Store all fetched dishes
+      selectedRecipeID: null, // Store selected recipeID
     };
   }
 
@@ -58,6 +59,12 @@ export class Home extends Component {
     this.setState({ isHovered: hoverState });
   };
 
+  // Method to handle dish click and set recipeID
+  handleDishClick = (recipeID) => {
+    this.setState({ selectedRecipeID: recipeID });
+    console.log("Selected Recipe ID:", recipeID); // Log the selected recipeID
+  };
+
   render() {
     return (
       <div className="containeer" style={{ display: "flex" }}>
@@ -80,6 +87,7 @@ export class Home extends Component {
             dishes={this.state.dishes} // Pass fetched dishes as props to Middle
             updateDish={this.updateDish}
             updateHoverState={this.updateHoverState} // Pass hoverState update function
+            onDishClick={this.handleDishClick} // Pass click handler to Middle
           />
         </div>
 

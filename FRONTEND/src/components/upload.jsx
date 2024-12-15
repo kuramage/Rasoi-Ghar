@@ -108,29 +108,35 @@ class Upload extends Component {
 
   // This method will be called by the Panel to save a new step
   handleAddStep = () => {
-    const { title, videoUrl, videoLink, notes, selectedIngredients } = this.state;
-    const newData = { title, videoUrl, videoLink, description: notes, ingredients: selectedIngredients };
-
+    const { title, videoLink, notes, selectedIngredients } = this.state;
+    const newData = { title:title, videoLink: videoLink, description: notes, ingredients: selectedIngredients };
+  
+    console.log(newData); // Log the step data to verify
+  
+    // Call the onAddStep method passed down from the parent (UploadPost)
+    this.props.onAddStep(newData);
+  
+    // Update local state (dataArray) to reflect the new step
     this.setState((prevState) => ({
       dataArray: [...prevState.dataArray, newData],
       title: "",
       videoUrl: null,
-      videoLink: "", // Reset the videoLink after adding a step
       notes: "",
       selectedIngredients: [],
       isEditingNotes: false,
     }));
   };
+  
+  
 
   // Method to handle selecting an entry from Panel
   handleSelectIndex = (index) => {
-    if (index === this.state.dataArray.length) {
+    if (index === this.state.dataArray.length ) {
       // Reset all fields to initial state if the latest entry is selected
       this.setState({
         currentIndex: index,
         title: "",
         videoUrl: null,
-        videoLink: "",
         notes: "",
         selectedIngredients: [],
         isEditingNotes: false,
@@ -141,7 +147,6 @@ class Upload extends Component {
         currentIndex: index,
         title: selectedData.title,
         videoUrl: selectedData.videoUrl,
-        videoLink: selectedData.videoLink, // Set the videoLink if it exists
         notes: selectedData.description,
         selectedIngredients: selectedData.ingredients,
         isEditingNotes: selectedData.description ? true : false,

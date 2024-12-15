@@ -43,6 +43,14 @@ class Sidebar extends Component {
             </Link>
           </li>
           <li>
+            <Link
+              to="/showpost"
+              className={isUploadActive ? "active" : ""} 
+            >
+              📄 post
+            </Link>
+          </li>
+          <li>
             <Link to="/profile">👤 Profile</Link>
           </li>
           <li>

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Middle = ({ dishes, updateDish, updateHoverState }) => {
+const Middle = ({ dishes, updateDish, updateHoverState,onDishClick }) => {
   const [hoveredDishIndex, setHoveredDishIndex] = useState(null);
+  const navigate = useNavigate(); // React Router hook for navigation
 
   // Handle hover on plate
   const handlePlateHover = (index, dish) => {
@@ -14,6 +16,20 @@ const Middle = ({ dishes, updateDish, updateHoverState }) => {
   const handlePlateLeave = () => {
     setHoveredDishIndex(null); // Reset hovered index
     updateHoverState(false); // Notify parent component of hover leave
+  };
+
+  // Handle click on a dish to navigate
+  const handleDishClick = (dish) => {
+    if (onDishClick) {
+      onDishClick(dish.recipeId); // Send recipeID to parent component
+    }
+    navigate("/showpost", {
+      state: {
+        dishName: dish.recipeName,
+        description: dish.recipeDescription,
+        images: dish.recipeImages || [], // Pass images if available
+      },
+    });
   };
 
   // Create columns with cyclic assignment of recipes (3 columns)
@@ -42,11 +58,13 @@ const Middle = ({ dishes, updateDish, updateHoverState }) => {
                 className={`post post-${colIndex + 1} ${isHovered ? "hover" : ""}`}
                 key={postIndex}
                 style={{ position: "relative", marginBottom: "20px" }}
+                onClick={() => handleDishClick(dish)}
               >
                 <div
                   className={`plate ${isHovered ? "hovered" : ""}`}
                   onMouseOver={() => handlePlateHover(currentIndex, dish)}
                   onMouseLeave={handlePlateLeave}
+                  onClick={() => handleDishClick(dish)} // Handle click to navigate
                   style={{ position: "relative", cursor: "pointer", textAlign: "center" }}
                 >
                   <img
@@ -60,17 +78,6 @@ const Middle = ({ dishes, updateDish, updateHoverState }) => {
                       border: "3px solid #ddd",
                     }}
                   />
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "120px",
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      textAlign: "center",
-                    }}
-                  >
-                   
-                  </div>
                 </div>
               </div>
             );

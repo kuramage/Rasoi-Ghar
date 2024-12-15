@@ -20,26 +20,96 @@ const errorResponse = (res, status, message) => {
     res.status(status).json({ message });
 };
 
-// Route to fetch all recipes
-router.get("/", async (req, res) => {
+
+router.post("/", async (req, res) => {
+    const {
+        stepsVideos,
+        stepsNotes,
+        stepsIngredients,
+        userId,
+        recipeName,
+        stepsTitles,
+        recipeDescription,
+        recipeImages,
+    } = req.body;
+
+    // Validate input
+    if (
+        !recipeName ||
+        !Array.isArray(stepsVideos) ||
+        !Array.isArray(stepsNotes) ||
+        !Array.isArray(stepsTitles) ||
+        !userId ||
+        !Array.isArray(stepsIngredients) || // Validate it's an array
+        !stepsIngredients.every((step) => Array.isArray(step)) || // Validate it's a 2D array
+        typeof recipeDescription !== "string" || // Correct field name for validation
+        !Array.isArray(recipeImages) // Correct field name for validation
+    ) {
+        return errorResponse(res, 400, "Invalid input. Please provide all required fields.");
+    }
+
     try {
-        // Fetch specific fields from the Recipe table
-        const { data, error } = await supabase
+        // Generate a UUID for recipeId
+        const recipeId = uuidv4();
+
+        // Insert recipe data into the Supabase table
+        const { data: recipeData, error: recipeError } = await supabase
             .from("Recipe")
-            .select("userId, recipeName, recipeLikes, recipeImages, recipeDescription");
+            .insert([
+                {
+                    recipeId,
+                    stepsVideos,
+                    stepsNotes,
+                    stepsIngredients,
+                    userId,
+                    recipeName,
+                    stepsTitles,
+                    recipeDescription,
+                    recipeImages,
+                    recipeLikes: [], // Initialize recipeLikes as an empty array
+                },
+            ])
+            .select();
 
-        if (error) {
-            console.error("Error fetching recipes:", error.message);
-            return errorResponse(res, 500, "Failed to fetch recipes.");
+        if (recipeError) {
+            console.error("Error inserting recipe:", recipeError.message);
+            return errorResponse(res, 500, "Failed to add recipe.");
         }
 
-        if (data.length === 0) {
-            return successResponse(res, "No recipes found.", []);
+        // Fetch the userDetails and update the userRecipes column
+        const { data: userData, error: userFetchError } = await supabase
+            .from("userDetails")
+            .select("userRecipes")
+            .eq("userId", userId)
+            .single();
+
+        if (userFetchError) {
+            console.error("Error fetching userDetails:", userFetchError.message);
+            return errorResponse(res, 404, "User not found.");
         }
 
-        return successResponse(res, "Recipes fetched successfully!", data);
+        const currentRecipes = userData.userRecipes || [];
+
+        // Add the new recipeId to the user's recipes
+        const updatedRecipes = [...currentRecipes, recipeId];
+
+        // Update the userRecipes column in the userDetails table
+        const { error: userUpdateError } = await supabase
+            .from("userDetails")
+            .update({ userRecipes: updatedRecipes })
+            .eq("userId", userId);
+
+        if (userUpdateError) {
+            console.error("Error updating userRecipes:", userUpdateError.message);
+            return errorResponse(res, 500, "Failed to update user's recipes.");
+        }
+
+        return successResponse(res, "Recipe added successfully and user details updated!", {
+            recipe: recipeData[0],
+            updatedUserRecipes: updatedRecipes,
+        });
     } catch (err) {
-        console.error("Error during fetching recipes:", err.message);
+        console.error("Error during recipe creation:", err.message);
         return errorResponse(res, 500, "Internal server error.");
     }
 });

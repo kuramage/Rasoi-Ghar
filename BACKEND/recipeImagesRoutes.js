@@ -11,7 +11,7 @@ const supabase = createClient(
 
 const router = Router();
 
-// Configure multer for file upload
+// Configure multer for file upload 
 const upload = multer({
     storage: multer.memoryStorage(), // Store files in memory before uploading to Supabase
     limits: { fileSize: 10 * 1024 * 1024 }, // 10MB file size limit for images
