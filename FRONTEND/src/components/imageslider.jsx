@@ -13,7 +13,7 @@ export class PostContent extends Component {
     super(props);
     this.state = {
       currentIndex: 0,
-      images: [chole1, chole2, chole3],
+      images: this.props.images,
       showButtons: false,
     };
     this.intervalId = null; // Store interval ID for cleanup

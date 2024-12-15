@@ -45,9 +45,9 @@ class Sidebar extends Component {
           <li>
             <Link
               to="/showpost"
-              className={isUploadActive ? "active" : ""} 
+              
             >
-              📄 post
+              👨‍🍳 post
             </Link>
           </li>
           <li>
@@ -55,8 +55,8 @@ class Sidebar extends Component {
           </li>
           <li>
             {/* Log out button */}
-            <button onClick={this.handleLogout} className="logout-button">
-              👤 LogOut
+            <button onClick={this.handleLogout} className="logout-button" style={{fontWeight:"bold",fontSize:"18px",marginLeft:"10px"}}>
+              📤 LogOut
             </button>
           </li>
         </ul>

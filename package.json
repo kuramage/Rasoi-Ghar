@@ -1,0 +1,24 @@
+{
+  "name": "back_end",
+  "version": "1.0.0",
+  "main": "back_end/server.js",
+  "scripts": {
+    "dev": "nodemon back_end/server.js",
+    "build": "npm install && npm install --prefix FRONTEND && npm run build --prefix FRONTEND",
+    "start": "node back_end/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.47.7",
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.21.2",
+    "multer": "^1.4.2",
+    "nodemon": "^3.1.9",
+    "uuid": "^8.0.0"
+  }
+}

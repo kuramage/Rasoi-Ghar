@@ -27,7 +27,8 @@ const Middle = ({ dishes, updateDish, updateHoverState,onDishClick }) => {
       state: {
         dishName: dish.recipeName,
         description: dish.recipeDescription,
-        images: dish.recipeImages || [], // Pass images if available
+        images: dish.recipeImages || [],
+        recipeId: dish.recipeId, 
       },
     });
   };

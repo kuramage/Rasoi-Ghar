@@ -1,40 +1,56 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import Sidebar from './sidebar'
-import Post_content from './post_content'
-import MainContent from './upload'
-export class showpost extends Component {
-  static propTypes = {
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Sidebar from './sidebar';
+import Post_content from './post_content';
+import { useLocation } from 'react-router-dom';
 
-  }
+// Functional component to handle location and pass props to Post_content
+const PostContent = () => {
+  const location = useLocation();
+  const { dishName, description, images, recipeId } = location.state || {};
 
+  return (
+    <div className="post-content-container">
+      {/* Render content or display a fallback if data is not available */}
+      {dishName ? (
+        <Post_content
+          dishName={dishName}
+          description={description}
+          images={images}
+          recipeId={recipeId}
+        />
+      ) : (
+        <p>No post content available. Please navigate here from a valid post.</p>
+      )}
+    </div>
+  );
+};
+
+class ShowPost extends Component {
   render() {
     return (
-    //   <div >
-    //     <Sidebar/>
-    //     <div>
-    //     <Post_content style={{border:"2px solid black"}} />
-    //     </div>
-       
-    //   </div>
-    <div className="flex h-screen">
-      <Sidebar isUploadActive={true} />
-      <div
-        style={{
-          width: "82.67vw",
-          position: "relative",
-          left: "250px",
-        //   display: "flex",
-        //   justifyContent: "center",
-        }}
-      >
-        <Post_content 
-          
-        />
+      <div className="flex h-screen">
+        {/* Sidebar Component */}
+        <Sidebar isUploadActive={true} />
+
+        {/* Main Content Area */}
+        <div
+          style={{
+            width: '82.67vw',
+            position: 'relative',
+            left: '250px',
+          }}
+        >
+          {/* Render the functional PostContent component */}
+          <PostContent />
         </div>
-    </div>
-    )
+      </div>
+    );
   }
 }
 
-export default showpost
+ShowPost.propTypes = {
+  // Add prop types if necessary
+};
+
+export default ShowPost;
