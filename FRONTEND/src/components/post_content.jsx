@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImageSlider from './imageslider';
-import chole1 from './chole/chole_1.jpg';
-import chole2 from './chole/chole_2.jpg';
-import chole3 from './chole/chole_3.jpg';
 
 export class PostContent extends Component {
   static propTypes = {
-    recipeId: PropTypes.string.isRequired, // Expect recipeId as a prop
+    recipeId: PropTypes.string.isRequired, // Expect recipeId as a required prop
   };
 
   state = {
     recipe: null,
     loading: true,
     error: null,
+    stepsData: [], // State to hold steps array
   };
 
-  // Fetch recipe details when the component mounts
   componentDidMount() {
     const { recipeId } = this.props;
     this.fetchRecipeDetails(recipeId);
@@ -24,7 +21,6 @@ export class PostContent extends Component {
 
   // Function to fetch recipe data from the API
   fetchRecipeDetails = (recipeId) => {
-    // Using the fetch API to make a GET request to the server
     fetch(`http://localhost:5000/recipes/${recipeId}`)
       .then((response) => {
         if (!response.ok) {
@@ -33,14 +29,22 @@ export class PostContent extends Component {
         return response.json(); // Parse the response JSON
       })
       .then((data) => {
-        // Update the state with the fetched recipe data
+        const recipe = data.data;
+
+        // Map fetched steps into the desired structure
+        const stepsData = recipe.stepsTitles.map((title, index) => ({
+          id: index + 1,
+          title: `${index + 1}. ${title}`,
+          image: recipe.recipeImages[index] , // Default image if not available
+        }));
+
         this.setState({
-          recipe: data.data, // Assuming the response has a 'data' field with recipe details
+          recipe,
+          stepsData, // Update stepsData in state
           loading: false,
         });
       })
       .catch((error) => {
-        // Handle any errors that occur during the fetch
         this.setState({
           error: error.message,
           loading: false,
@@ -49,63 +53,95 @@ export class PostContent extends Component {
   };
 
   render() {
-    const { loading, error, recipe } = this.state;
+    const { loading, error, recipe, stepsData } = this.state;
 
     if (loading) {
-      return <div>Loading...</div>; // Show loading state
+      return <div>Loading...</div>;
     }
 
     if (error) {
-      return <div>Error: {error}</div>; // Show error message
+      return <div>Error: {error}</div>;
     }
 
-    // Render the recipe content if the data is available
+    // Render the recipe content
     return (
-      <div className="chole-puri-container" style={{ height: "99vh" }}>
-        <div className="post-open-middle" style={{ display: "flex", height: "55vh", marginBottom: "10px" }}>
-          <div className="post-photos" style={{ width: "100vw" }}>
-            <div className="carousel">
-              <ImageSlider />
-            </div>
+      <div className="chole-puri-container" style={{ height: '99vh', overflowY: 'auto' }}>
+        {/* Recipe Header Section */}
+        <div className="post-open-middle" style={{ display: 'flex', height: '55vh', marginBottom: '20px' }}>
+          {/* Image Slider */}
+          <div className="post-photos" style={{ width: '60%', paddingRight: '20px' }}>
+            <ImageSlider images={recipe.recipeImages || []} />
           </div>
 
-          <div className="details" style={{ display: "flex", flexDirection: "column" }}>
-            <h2 style={{ fontFamily: 'Istok Web, sans-serif', fontSize: "60px" }}>
-              {recipe.name} {/* Display recipe name */}
-            </h2>
-
-            <div className="interaction" style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px" }}>
-              <span className="like" style={{ fontSize: "30px" }}>
-                ❤️ {recipe.likes} {/* Display likes */}
-              </span>
-              <button className="button" style={{ height: "8vh", width: "20vw", fontSize: "30px", color: "black", position: "relative", left: "-120px" }}>
+          {/* Recipe Details */}
+          <div className="details" style={{ width: '40%', display: 'flex', flexDirection: 'column' }}>
+            <h2 style={{ fontFamily: 'Istok Web, sans-serif', fontSize: '48px' }}>{recipe.recipeName}</h2>
+            <div className="interaction" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+              <span style={{ fontSize: '24px' }}>❤️ {recipe.recipeLikes.length || 0} Likes</span>
+              <button
+                style={{
+                  height: '50px',
+                  padding: '0 20px',
+                  fontSize: '18px',
+                  color: 'white',
+                  backgroundColor: '#f76c6c',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                }}
+              >
                 Let's cook 🧑‍🍳
               </button>
             </div>
-
-            <div style={{ fontFamily: 'Istok Web, sans-serif', fontSize: "24px" }}>
-              <p>
-                {recipe.description} {/* Display recipe description */}
-              </p>
-            </div>
+            <p style={{ fontFamily: 'Istok Web, sans-serif', fontSize: '18px', lineHeight: '1.5' }}>
+              {recipe.recipeDescription}
+            </p>
           </div>
         </div>
 
-        <div className="step-heading" style={{ display: "flex" }}>
-          <hr style={{ border: "none", borderBottom: "4px solid grey", margin: "0", width: "38vw" }} />
-          <span className="jetbrains-mono" style={{ margin: "0px 40px 0px 50px", fontSize: "25px", position: "relative", top: "-17px", color: "grey" }}>
+        {/* Steps Section */}
+        <div className="step-heading" style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+          <hr style={{ flex: 1, border: 'none', borderBottom: '2px solid #ddd' }} />
+          <span
+            style={{
+              margin: '0 20px',
+              fontSize: '20px',
+              color: 'grey',
+              fontWeight: 'bold',
+            }}
+          >
             Steps
           </span>
-          <hr style={{ border: "none", borderBottom: "4px solid grey", margin: "0", width: "40vw" }} />
+          <hr style={{ flex: 1, border: 'none', borderBottom: '2px solid #ddd' }} />
         </div>
 
-        <div className="steps">
-          {/* Map through the steps and render them */}
-          {recipe.steps && recipe.steps.map((step, index) => (
-            <div className="step" key={index}>
-              <img src={step.image} alt={`Step ${index + 1}`} className="step-image" />
-              <div className="step-text">
-                <span>{step.title}</span>
+        <div className="steps" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {stepsData.map((step) => (
+            <div
+              key={step.id}
+              className="step"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '20px',
+                padding: '10px',
+                border: '1px solid #ddd',
+                borderRadius: '8px',
+                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+              }}
+            >
+              <img
+                src={step.image}
+                alt={`Step ${step.id}`}
+                style={{
+                  width: '100px',
+                  height: '100px',
+                  borderRadius: '8px',
+                  objectFit: 'cover',
+                }}
+              />
+              <div style={{ flex: 1 }}>
+                <h4 style={{ margin: '0 0 10px', fontSize: '18px', fontWeight: 'bold' }}>{step.title}</h4>
               </div>
             </div>
           ))}
