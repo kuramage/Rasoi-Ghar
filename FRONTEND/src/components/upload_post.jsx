@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Sidebar from "./sidebar";
 import MainContent from "./upload";
-import Panel from "./Panel";
+import Panel from "../Panel";
 
 const UploadPost = () => {
   const [title, setTitle] = useState("untitled");
