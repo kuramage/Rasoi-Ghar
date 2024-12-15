@@ -60,7 +60,7 @@ function Panel({ onStepSelect,onImagesReceived, uploadRef, title }) {
   
     try {
       // Make API request to upload the image
-      const response = await fetch("http://localhost:5000/recipeImages/upload", {
+      const response = await fetch("https://rasoi-ghar.onrender.com/recipeImages/upload", {
         method: "POST",
         body: imageFormData,  // Using imageFormData instead of formData
       });

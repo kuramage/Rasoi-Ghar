@@ -22,7 +22,7 @@ const SignIn = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/auth/signin", {
+      const response = await fetch("https://rasoi-ghar.onrender.com/auth/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const SignIn = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/auth/signup", {
+      const response = await fetch("https://rasoi-ghar.onrender.com/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

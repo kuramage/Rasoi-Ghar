@@ -21,7 +21,7 @@ export class PostContent extends Component {
 
   // Function to fetch recipe data from the API
   fetchRecipeDetails = (recipeId) => {
-    fetch(`http://localhost:5000/recipes/${recipeId}`)
+    fetch(`https://rasoi-ghar.onrender.com/recipes/${recipeId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch recipe data');

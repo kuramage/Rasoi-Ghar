@@ -1,39 +1,42 @@
-// server.js
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv"); // For environment variables
-const authRoutes = require("./authRoutes.js"); // Import auth routes
-const recipesRoutes = require("./recipesRoutes.js"); // Import recipes routes
-const ingredientRoutes = require("./ingredientRoutes.js"); // Import ingredient routes
-const stepsVideosRouter = require("./stepsVideosRoutes.js"); // Import videos routes
-const recipeImagesRouter = require("./recipeImagesRoutes.js"); // Import image routes
-const userRoutes = require("./userRoutes.js"); // Import user routes
-const path = require('path');
+import express from "npm:express";
+import cors from "npm:cors";
+import dotenv from "npm:dotenv"; // For environment variables
+import authRoutes from "./authRoutes.js"; // Import auth routes
+import recipesRoutes from "./recipesRoutes.js"; // Import recipes routes
+import ingredientRoutes from "./ingredientRoutes.js"; // Import ingredient routes
+import stepsVideosRouter from "./stepsVideosRoutes.js"; // Import videos routes
+import recipeImagesRouter from "./recipeImagesRoutes.js"; // Import image routes
+import userRoutes from "./userRoutes.js"; // Import user routes
 
-// Load environment variables from .env file
+// Load environment variables
 dotenv.config();
 
 const app = express();
-const port = 5000; // Use environment variable for PORT, or fallback to 5000
+const port = Deno.env.get("PORT") || 5000;
 
-// Middleware
 app.use(cors({
-    origin: ["http://localhost:5000", "http://localhost:5173"] // Ensure to add your frontend URL
+    origin: ["http://localhost:5000", "http://localhost:5173","https://rasoi-ghar.onrender.com"]
 }));
 
-app.use(express.json()); // Parse incoming JSON data
+app.use(express.json());
 
-// Define Routes
-app.use("/auth", authRoutes); // Handle authentication routes
-app.use("/recipes", recipesRoutes); // Handle recipe routes
-app.use("/ingredients", ingredientRoutes); // Handle ingredient routes
-app.use("/stepsVideos", stepsVideosRouter); // Handle video routes
-app.use("/recipeImages", recipeImagesRouter); // Handle image routes
-app.use("/user", userRoutes);  // Handle user routes  
+// Use the auth routes
+app.use("/auth", authRoutes);
 
-// Static file serving for frontend
-// Correct the path to the FRONTEND/dist directory located at the root of the project
-app.use(express.static(path.join(__dirname, "../FRONTEND/dist")));
+// Use the recipes routes
+app.use("/recipes", recipesRoutes);
+
+// Use the ingredient routes
+app.use("/ingredients", ingredientRoutes);
+
+// Use the video routes
+app.use("/stepsVideos", stepsVideosRouter);
+
+// Use the image routes
+app.use("/recipeImages", recipeImagesRouter);
+
+// Use the user routes
+app.use("/user", userRoutes);  // Add this line to use user routes
 
 // 404 Route Handling
 app.use((req, res) => {
@@ -44,11 +47,6 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
     console.error("Unhandled error:", err.message);
     res.status(500).json({ message: "Internal server error." });
-});
-
-// Catch-all for frontend routing in production (SPA behavior)
-app.get('*', (_, res) => {
-    res.sendFile(path.resolve(__dirname, "../FRONTEND", "dist", "index.html"));
 });
 
 // Start the server
